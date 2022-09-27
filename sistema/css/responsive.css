@@ -1,0 +1,109 @@
+@media screen and (max-width: 1000px){
+    #container{
+        padding: 45px 10px 10px;
+    }
+    .btnMenu{
+        display: block;
+    }
+    .optionsBar > p{
+        display: none;
+    }
+    .optionsBar > span{
+        display: none;
+    }
+    .optionsBar .user{
+        display: block;
+    }
+    nav{
+        position: absolute;
+        width: 100%;
+        left: -100%;
+        transition: 0.5s all;
+    }
+    nav ul{
+        flex-direction: column;
+    }
+    nav ul li:hover ul{
+        display: none;
+    }
+    nav ul li{
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+    }
+    nav ul li a{
+        text-align: left;
+        width: 100%;
+    }
+    nav li ul{
+        position: relative;
+        border-radius: 0;
+    }
+    nav li ul li:last-child{
+        border-radius: 0;
+    }
+    nav .principal .arrow{
+        float: right;
+    }
+    header .logo{
+        width: 100px;
+        height: 60px;
+    }
+}
+@media screen and (max-width: 768px){
+    .dashboard{
+        flex-wrap: wrap;
+    }
+    .dashboard a{
+        width: 50%;
+        border: 1px solid #ccc;
+    }
+    .containerDataUser, .containerDataEmpresa{
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+    #container h1{
+        font-size: 13pt !important;
+    }
+    .logoUser{
+        width: 150px;
+        height: 150px;
+    }
+    /* LISTAS DE DATOS */
+    .btn_new{
+        margin: 0;
+        margin-right: 10px;
+        padding: 5px 10px;
+        font-size: 8pt;
+    }
+    .form_search{
+        width: 95%;
+        margin: 5px;
+    }
+    .containerTable{
+        width: 100%;
+        border: 5px solid #ccc;
+        overflow: scroll;
+    }
+    table{
+        width: 850px;
+    }
+    table td, table th{
+        padding: 5px;
+        font-size: 10pt;
+    }
+}
+@media screen and (max-width: 460px){
+    .dashboard a{
+        padding: 5px 2px;
+    }
+    .dashboard p{
+        font-size: 9pt;
+    }
+    .dashboard span{
+        font-size: 10pt;
+    }
+    .divDataUser label{
+        width: 80px;
+    }
+}
