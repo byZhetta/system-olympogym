@@ -1,7 +1,12 @@
 <?php
 
+    require __DIR__ . '/vendor/autoload.php';
+
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+
     try {
-        $conexionDB = new mysqli("localhost", "root", "", "gimnasio");
+        $conexionDB = new mysqli($_ENV['HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']);
         if ($conexionDB->connect_error){
             die("Ocurrió un error al conectar la base de datos!");
         }

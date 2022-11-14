@@ -31,11 +31,15 @@ create database gimnasio
 
 * Cargar el código del archivo **BD_gimnasio.sql**
 
-* Modificar el archivo **conexion.php**
+* Crear un archivo **.env**
+
+* Copiar las variables del archivo **.example.env** y pegar en **.env** completando con los datos de conexión
 
 ```
-// verificar el usuario, contraseña, y el nombre de la base de datos creada, en la línea 4
-$conexionDB = new mysqli("localhost", "root", "", "gimnasio");
+HOST =         // Tipo de host
+DB_USER =      // Nombre de usuario
+DB_PASSWORD =  // Contraseña
+DB_NAME =      // Nombre de base de datos
 ```
 
 * Mover los archivos a la carpeta de lectura del servidor
