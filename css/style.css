@@ -5,7 +5,10 @@
 }
 
 body {
-    background: #0d141e;
+    /* background: #0d141e; */
+    background: url(../img/gym.jpg);
+    background-size: cover; 
+    background-attachment: fixed;
 }
 
 /** Estilos de Formulario | LOGIN **/
