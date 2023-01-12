@@ -1,9 +1,9 @@
 <?php
 
-    require __DIR__ . '/vendor/autoload.php';
+    // require __DIR__ . '/vendor/autoload.php';
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
+    // $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    // $dotenv->load();
 
     try {
         $conexionDB = new mysqli($_ENV['HOST'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME'], $_ENV['DB_PORT']);
