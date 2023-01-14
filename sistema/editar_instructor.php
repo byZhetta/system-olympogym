@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include "../conexion.php";
     
     if(!empty($_POST)){

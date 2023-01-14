@@ -5,109 +5,109 @@
 
     // si el formulario ha sido enviado procesa los datos del formulario                        
     
-            if (isset($_GET['nPdf'])) 
+    if (isset($_GET['nPdf'])) 
+        {
+            require("fpdf.php"); 
+            header('Content-Type: text/html; charset=UTF-8');  
+            $pdf= new MiPDF();
+            $pdf->AliasNBPages();
+                // para que tome el número de página y salga abajo en el footer
+            $pdf->AddPage();
+            $pdf->SetFont('Arial','B',12);
+            $pdf->SetFillColor(232,232,232);
+                // color del encabezado
+            $pdf->Ln(10);
+                // dejo un espacio de 10
+            $pdf->Cell(25, 6, utf8_decode('Código'), 1, 0, 'C', 1);
+            $pdf->Cell(65, 6, 'Descripcion', 1, 0, 'C', 1);
+            $pdf->Cell(35, 6, 'Marca', 1, 0, 'C', 1);
+            $pdf->Cell(25, 6, 'Cantidad', 1, 0, 'C', 1);
+            $pdf->Cell(35, 6, 'Precio Unitario', 1, 1, 'C', 1);
+                // son los Títulos de la tabla
+                //     ancho/ alto/ texto/ borde/ salto de línea/ Centrado
+
+            $sql = "SELECT IdArticulo, Descripcion, Cantidad, Precio_Unitario, Marca FROM articulos";
+            $queryArticulos = $conexionDB->query($sql);
+            if ($queryArticulos->num_rows > 0)
+            {
+                $pdf->SetFont('Arial','',10);
+                    // fuente para las filas de la tabla
+                $pdf->SetFillColor(255,255,255);
+                    // fondo blanco para las filas de la tabla
+
+                while ($fila = $queryArticulos->fetch_assoc())
                 {
-                    require("fpdf.php"); 
-                    header('Content-Type: text/html; charset=UTF-8');  
-                    $pdf= new MiPDF();
-                    $pdf->AliasNBPages();
-                        // para que tome el número de página y salga abajo en el footer
-                    $pdf->AddPage();
-                    $pdf->SetFont('Arial','B',12);
-                    $pdf->SetFillColor(232,232,232);
-                        // color del encabezado
-                    $pdf->Ln(10);
-                        // dejo un espacio de 10
-                    $pdf->Cell(25, 6, utf8_decode('Código'), 1, 0, 'C', 1);
-                    $pdf->Cell(65, 6, 'Descripcion', 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, 'Marca', 1, 0, 'C', 1);
-                    $pdf->Cell(25, 6, 'Cantidad', 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, 'Precio Unitario', 1, 1, 'C', 1);
-                        // son los Títulos de la tabla
-                        //     ancho/ alto/ texto/ borde/ salto de línea/ Centrado
-
-                    $sql = "SELECT IdArticulo, Descripcion, Cantidad, Precio_Unitario, Marca FROM articulos";
-                    $queryArticulos = $conexionDB->query($sql);
-                    if ($queryArticulos->num_rows > 0)
-                    {
-                        $pdf->SetFont('Arial','',10);
-                            // fuente para las filas de la tabla
-                        $pdf->SetFillColor(255,255,255);
-                            // fondo blanco para las filas de la tabla
-
-                        while ($fila = $queryArticulos->fetch_assoc())
-                        {
-                            // recorro el query imprimiendo los campos
-                            $pdf->Cell(25, 6, $fila["IdArticulo"], 1, 0, 'C', 1);
-                            $pdf->Cell(65, 6, utf8_decode($fila["Descripcion"]), 1, 0, 'C', 1);
-                            $pdf->Cell(35, 6, $fila["Marca"], 1, 0, 'C', 1);
-                            $pdf->Cell(25, 6, $fila["Cantidad"], 1, 0, 'C', 1);
-                            $pdf->Cell(35, 6, '$ '.$fila["Precio_Unitario"], 1, 1, 'C', 1);
-                        }
-                        $pdf->Output('', 'articulos_completo.pdf');
-                        // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"
-                        // primer parámetro: nada: muestra el archivo, D muestra para descargarlo
-                    }
-                    else    
-                        echo 'No hay artículos para mostrar';
+                    // recorro el query imprimiendo los campos
+                    $pdf->Cell(25, 6, $fila["IdArticulo"], 1, 0, 'C', 1);
+                    $pdf->Cell(65, 6, utf8_decode($fila["Descripcion"]), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, $fila["Marca"], 1, 0, 'C', 1);
+                    $pdf->Cell(25, 6, $fila["Cantidad"], 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, '$ '.$fila["Precio_Unitario"], 1, 1, 'C', 1);
                 }
-                else
+                $pdf->Output('', 'articulos_completo.pdf');
+                // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"
+                // primer parámetro: nada: muestra el archivo, D muestra para descargarlo
+            }
+            else    
+                echo 'No hay artículos para mostrar';
+        }
+        else
+        {
+            if (isset($_GET['nExcel'])) 
+            {
+                header('Content-type:application/vnd.ms-excel; charset-UTF-8');
+                header('Content-Disposition: attachment;filename=reporteArticulos.xls');
+                header('Pragma: no-cache');
+                header('Expires: 0');
+                $sql = "SELECT IdArticulo, Descripcion, Cantidad, Precio_Unitario, Marca FROM articulos";
+                $queryArticulos = $conexionDB->query($sql);
+                if ($queryArticulos->num_rows > 0)
                 {
-                    if (isset($_GET['nExcel'])) 
+                    echo "<table border-\"0\"; border-color- \"black\">";
+                    echo    "<tr style=\"background-color: beige\">";
+                    echo        "<td style=\"width:100px\">";
+                    echo            utf8_decode("Código");
+                    echo        "<td>";
+                    echo        "<td style=\"width:300px\">";
+                    echo            "Descripcion";
+                    echo        "<td>";
+                    echo        "<td style=\"width:100px\">";
+                    echo            "Marca";
+                    echo        "<td>";
+                    echo        "<td style=\"width:100px\">";
+                    echo            "Cantidad";
+                    echo        "<td>";
+                    echo        "<td style=\"width:100px\">";
+                    echo            "Precio/U";
+                    echo        "<td>";
+                    echo    "<tr>";
+                    while ($fila = $queryArticulos->fetch_assoc())
                     {
-                        header('Content-type:application/vnd.ms-excel; charset-UTF-8');
-                        header('Content-Disposition: attachment;filename=reporteArticulos.xls');
-                        header('Pragma: no-cache');
-                        header('Expires: 0');
-                        $sql = "SELECT IdArticulo, Descripcion, Cantidad, Precio_Unitario, Marca FROM articulos";
-                        $queryArticulos = $conexionDB->query($sql);
-                        if ($queryArticulos->num_rows > 0)
-                        {
-                            echo "<table border-\"0\"; border-color- \"black\">";
-                            echo    "<tr style=\"background-color: beige\">";
-                            echo        "<td style=\"width:100px\">";
-                            echo            utf8_decode("Código");
-                            echo        "<td>";
-                            echo        "<td style=\"width:300px\">";
-                            echo            "Descripcion";
-                            echo        "<td>";
-                            echo        "<td style=\"width:100px\">";
-                            echo            "Marca";
-                            echo        "<td>";
-                            echo        "<td style=\"width:100px\">";
-                            echo            "Cantidad";
-                            echo        "<td>";
-                            echo        "<td style=\"width:100px\">";
-                            echo            "Precio/U";
-                            echo        "<td>";
-                            echo    "<tr>";
-                            while ($fila = $queryArticulos->fetch_assoc())
-                            {
-                                echo    "<tr>";
-                                echo        "<td style=\"width:100px\">";
-                                echo            $fila["IdArticulo"];
-                                echo        "<td>";
-                                echo        "<td style=\"width:300px\">";
-                                echo             utf8_decode($fila["Descripcion"]);
-                                echo        "<td>";
-                                echo        "<td style=\"width:100px\">";
-                                echo            $fila["Marca"];
-                                echo        "<td>";
-                                echo        "<td style=\"width:100px\">";
-                                echo            $fila["Cantidad"];
-                                echo        "<td>";
-                                echo        "<td style=\"width:100px\">";
-                                echo            $fila["Precio_Unitario"];
-                                echo        "<td>";
-                                echo    "<tr>";                                                                    
-                            }
-                            echo    "</table>";                                                                    
-
-
-                        }
-
+                        echo    "<tr>";
+                        echo        "<td style=\"width:100px\">";
+                        echo            $fila["IdArticulo"];
+                        echo        "<td>";
+                        echo        "<td style=\"width:300px\">";
+                        echo             utf8_decode($fila["Descripcion"]);
+                        echo        "<td>";
+                        echo        "<td style=\"width:100px\">";
+                        echo            $fila["Marca"];
+                        echo        "<td>";
+                        echo        "<td style=\"width:100px\">";
+                        echo            $fila["Cantidad"];
+                        echo        "<td>";
+                        echo        "<td style=\"width:100px\">";
+                        echo            $fila["Precio_Unitario"];
+                        echo        "<td>";
+                        echo    "<tr>";                                                                    
                     }
+                    echo    "</table>";                                                                    
+
+
                 }
+
+            }
+        }
               
            
 

@@ -1,6 +1,7 @@
 <?php 
 
-    include "../conexion.php";    
+    include "../conexion.php"; 
+    session_start();   
 
     if(!empty($_POST)){
         $alert='';

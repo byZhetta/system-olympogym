@@ -1,11 +1,11 @@
 <?php
-    
+    session_start();
     include "../conexion.php";
 
     if(!empty($_POST)){
         if($_POST['idusuario'] == 1){
             header("location: lista_usuarios.php");
-            mysqi_close($conexionDB);
+            mysqli_close($conexionDB);
             exit;
         }        
 
