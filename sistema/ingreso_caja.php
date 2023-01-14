@@ -8,8 +8,7 @@
         if( empty($_POST['sueldo']) ) {
             $alert='<p class="msg_error">El campo sueldo es obligatorio.</p>';
         } else {
-            
-            session_start();   
+              
             $sueldo = $_POST['sueldo'];
             $usuario = $_SESSION['idUser'];
 
