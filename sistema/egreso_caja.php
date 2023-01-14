@@ -27,8 +27,8 @@
                     $data = mysqli_fetch_array($query);
                     $totalcaja = $data['total'];
 
-                    $query_insert = mysqli_query($conexionDB,"INSERT INTO caja(Actividad,Monto_salida,Total_caja,Cod_Empleado,Estado)
-                                                                    VALUES('Egreso de dinero','$sueldo','$totalcaja','$usuario','Cerrado')");
+                    $query_insert = mysqli_query($conexionDB,"INSERT INTO caja(Actividad,Monto_inicial,Monto_salida,Total_caja,Cod_Empleado,Estado)
+                                                                    VALUES('Egreso de dinero','0.00','$sueldo','$totalcaja','$usuario','Cerrado')");
                                                                 
                     $queryEstado = mysqli_query($conexionDB,"UPDATE caja SET Estado = 'Cerrado' WHERE Cod_Empleado = '$usuario'");
 

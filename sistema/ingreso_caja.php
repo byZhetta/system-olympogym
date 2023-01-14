@@ -23,8 +23,8 @@
                     $data = mysqli_fetch_array($sumcaja);
                     $totalcaja = $data['total'];
 
-                    $query_insert = mysqli_query($conexionDB,"INSERT INTO caja(Actividad,Monto_inicial,Total_caja,Cod_Empleado,Estado)
-                                                                        VALUES('Ingreso de dinero','$sueldo','$totalcaja','$usuario','Abierto')");
+                    $query_insert = mysqli_query($conexionDB,"INSERT INTO caja(Actividad,Monto_inicial,Monto_salida,Total_caja,Cod_Empleado,Estado)
+                                                                        VALUES('Ingreso de dinero','$sueldo','0.00','$totalcaja','$usuario','Abierto')");
                     mysqli_close($conexionDB);
                     if($query_insert){
                         header('location: index.php');
@@ -35,8 +35,8 @@
                     $alert = '<p class="msg_error">No se encontro ningun resultado.</p>';
                 }
             } else {
-                $query_insert = mysqli_query($conexionDB,"INSERT INTO caja(Actividad,Monto_inicial,Total_caja,Cod_Empleado,Estado)
-                                                                    VALUES('Ingreso de dinero','$sueldo','$sueldo','$usuario','Abierto')");
+                $query_insert = mysqli_query($conexionDB,"INSERT INTO caja(Actividad,Monto_inicial,Monto_salida,Total_caja,Cod_Empleado,Estado)
+                                                                    VALUES('Ingreso de dinero','$sueldo','0.00','$sueldo','$usuario','Abierto')");
                 mysqli_close($conexionDB);
                 header('location: index.php');
             }   
