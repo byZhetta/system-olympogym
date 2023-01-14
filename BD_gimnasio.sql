@@ -355,7 +355,7 @@ INSERT INTO `socios` (`Id_Socio`, `Nombre`, `Dni`, `Direccion`, `Telefono`, `Ema
 (2, 'Maria Gomez', 34440444, 'Ungria 100', 159090000, 'mariagomez@mail.com'),
 (3, 'Marcos Rios', 38888000, 'Angola 818', 157777777, 'mrios88@hmail.com'),
 (4, 'Teresa Meza', 40000001, 'Luna 123', 155050000, 'mteresaa@mail.com'),
-(5, 'Julio Santos', 32900001, 'Uruguay 1584', 157000007, 'julsantosok@wmail.com'),
+(5, 'Julio Santos', 32900001, 'Uruguay 1584', 157000007, 'julsantosok@wmail.com');
 
 -- --------------------------------------------------------
 
