@@ -31,7 +31,7 @@
 			$this->Ln(10);
 			$this->Cell(103);
 			$this->SetFont('Arial','B',13);
-			$this->Cell(26,7,utf8_decode('Factura Nº:'),0,0);
+			$this->Cell(26,7,mb_convert_encoding('Factura Nº:', 'ISO-8859-1', 'UTF-8'),0,0);
 			$this->SetFont('Arial','B',13);
 			$this->Cell(20,7,$nFactura,0,0);
 
@@ -56,11 +56,11 @@
 			$this->SetFont('Arial','B',13);
 			$this->Cell(80,8,'Vendedor:',0,0);
 			$this->SetFont('Arial','',13);
-			$this->Cell(0,8,utf8_decode($nombreven),0,1);
+			$this->Cell(0,8,mb_convert_encoding($nombreven, 'ISO-8859-1', 'UTF-8'),0,1);
 			$this->SetFont('Arial','B',13);
 			$this->Cell(80,8,'Nombre del Cliente:',0,0);
 			$this->SetFont('Arial','',13);
-			$this->Cell(0,8,utf8_decode($nombresoc),0,1);
+			$this->Cell(0,8,mb_convert_encoding($nombresoc, 'ISO-8859-1', 'UTF-8'),0,1);
 			$this->SetFont('Arial','B',13);
 			$this->Cell(80,8,'DNI del Cliente:',0,0);
 			$this->SetFont('Arial','',13);
@@ -77,7 +77,7 @@
 			// el punto Y comenzará desde el punto final de la página, 15 puntos arriba
 			$this->SetFont('Arial','I',13);
 			// Italic (cursiva)
-			$this->Cell(0, 10, utf8_decode('Gracias por su compra !!'), 0, 0, 'C');
+			$this->Cell(0, 10, mb_convert_encoding('Gracias por su compra !!', 'ISO-8859-1', 'UTF-8'), 0, 0, 'C');
 			// x y utf por el acento
 		}
 	}

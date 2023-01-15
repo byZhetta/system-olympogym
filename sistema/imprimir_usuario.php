@@ -17,7 +17,7 @@
                 // color del encabezado
             $pdf->Ln(10);
                 // dejo un espacio de 10
-            $pdf->Cell(10, 6, utf8_decode('Id'), 1, 0, 'C', 1);
+            $pdf->Cell(10, 6, 'Id', 1, 0, 'C', 1);
             $pdf->Cell(35, 6, 'Nombre', 1, 0, 'C', 1);
             $pdf->Cell(30, 6, 'Dni', 1, 0, 'C', 1);
             $pdf->Cell(35, 6, 'Direccion', 1, 0, 'C', 1);
@@ -40,9 +40,9 @@
                 {
                     // recorro el query imprimiendo los campos
                     $pdf->Cell(10, 6, $fila["IdEmpleado"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, $fila["Nombre"], 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
                     $pdf->Cell(30, 6, $fila["Dni"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, $fila["Direccion"], 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
                     $pdf->Cell(20, 6, $fila["Telefono"], 1, 0, 'C', 1);
                     $pdf->Cell(40, 6, $fila["Email"], 1, 0, 'C', 1);
                     $pdf->Cell(25, 6, $fila["Usuario"], 1, 1, 'C', 1);
@@ -97,13 +97,13 @@
                         echo            $fila["IdEmpleado"];
                         echo        "<td>";
                         echo        "<td style=\"width:200px\">";
-                        echo             $fila["Nombre"];
+                        echo             mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8');
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
                         echo            $fila["Dni"];
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
-                        echo            $fila["Direccion"];
+                        echo            mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8');
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
                         echo            $fila["Telefono"];

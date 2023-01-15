@@ -20,9 +20,8 @@
             // el punto Y comenzará desde el punto final de la página, 15 puntos arriba
         $this->SetFont('Arial','I',8);
                 //              Italic (cursiva)
-        $this->Cell(0, 10, utf8_decode('Página '). $this->PageNo().' / {nb}', 0, 0, 'C');
+        $this->Cell(0, 10, mb_convert_encoding('Página ', 'ISO-8859-1', 'UTF-8'). $this->PageNo().' / {nb}', 0, 0, 'C');
                 //   x  y  utf por el acento     
-
         }
     }
         

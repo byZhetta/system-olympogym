@@ -17,7 +17,7 @@
                 // color del encabezado
             $pdf->Ln(10);
                 // dejo un espacio de 10
-            $pdf->Cell(25, 6, utf8_decode('Nro.'), 1, 0, 'C', 1);
+            $pdf->Cell(25, 6, 'Nro.', 1, 0, 'C', 1);
             $pdf->Cell(35, 6, 'Nombre', 1, 0, 'C', 1);
             $pdf->Cell(35, 6, 'Direccion', 1, 0, 'C', 1);
             $pdf->Cell(20, 6, 'C Postal', 1, 0, 'C', 1);
@@ -39,8 +39,8 @@
                 {
                     // recorro el query imprimiendo los campos
                     $pdf->Cell(25, 6, $fila["IdProveedor"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, utf8_decode($fila["Nombre"]), 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, utf8_decode($fila["Direccion"]), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
                     $pdf->Cell(20, 6, $fila["Codigo_Postal"], 1, 0, 'C', 1);
                     $pdf->Cell(25, 6, $fila["Telefono"], 1, 0, 'C', 1);
                     $pdf->Cell(43, 6, $fila["Email"], 1, 1, 'C', 1);
@@ -92,10 +92,10 @@
                         echo            $fila["IdProveedor"];
                         echo        "<td>";
                         echo        "<td style=\"width:300px\">";
-                        echo             $fila["Nombre"];
+                        echo             mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8');
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
-                        echo            $fila["Direccion"];
+                        echo            mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8');
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
                         echo            $fila["Codigo_Postal"];

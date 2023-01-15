@@ -14,8 +14,8 @@
 	$pdf->SetFont('Arial','B',10);
 	
     // son los Títulos de la tabla
-	$pdf->Cell(17,8,utf8_decode('Código'),1,0,'C',1);
-    $pdf->Cell(99,8,utf8_decode('Descripción'),1,0,'C',1);
+	$pdf->Cell(17,8,mb_convert_encoding('Código', 'ISO-8859-1', 'UTF-8'),1,0,'C',1);
+    $pdf->Cell(99,8,mb_convert_encoding('Descripción', 'ISO-8859-1', 'UTF-8'),1,0,'C',1);
     $pdf->Cell(17,8,'Cantidad',1,0,'C',1);
     $pdf->Cell(28,8,'Precio Unitario',1,0,'C',1);
     $pdf->Cell(28,8,'Importe',1,1,'C',1);
@@ -45,7 +45,7 @@
 
         while ($fila = $queryprod->fetch_assoc()) {
             $pdf->Cell(17,6,$fila["IdArticulo"],1,0,'C',1);
-            $pdf->Cell(99,6,utf8_decode($fila["Descripcion"]).' - '.$fila["Marca"],1,0,'',1);
+            $pdf->Cell(99,6,mb_convert_encoding($fila["Descripcion"], 'ISO-8859-1', 'UTF-8').' - '.$fila["Marca"],1,0,'',1);
             $pdf->Cell(17,6,$fila["Cantidad"],1,0,'C',1);
             $pdf->Cell(28,6,'$ '.$fila["precio_venta"],1,0,'R',1);
             $pdf->Cell(28,6,'$ '.$fila["precio_total"],1,1,'R',1);
@@ -70,7 +70,7 @@
 
         while ($fila = $querymemb->fetch_assoc()) {
             $pdf->Cell(17,12,$fila["IdClase"],1,0,'C',1);
-            $pdf->Cell(99,6,utf8_decode($fila["NombreC"]).' - Periodo: '.$fila["Periodo"],1,0,'',1);
+            $pdf->Cell(99,6,mb_convert_encoding($fila["NombreC"], 'ISO-8859-1', 'UTF-8').' - Periodo: '.$fila["Periodo"],1,0,'',1);
             $pdf->Cell(17,6,' 1 ',1,0,'C',1);
             $pdf->Cell(28,6,'$ '.$fila["Costo_Clase"],1,0,'R',1);
             $pdf->Cell(28,6,'$ '.$fila["Total"],1,1,'R',1);

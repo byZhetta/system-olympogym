@@ -18,7 +18,7 @@
                 // color del encabezado
             $pdf->Ln(10);
                 // dejo un espacio de 10
-            $pdf->Cell(25, 6, utf8_decode('Nro. Factura'), 1, 0, 'C', 1);
+            $pdf->Cell(25, 6, 'Nro. Factura', 1, 0, 'C', 1);
             $pdf->Cell(50, 6, 'Fecha/Hora', 1, 0, 'C', 1);
             $pdf->Cell(25, 6, 'Dni Cliente', 1, 0, 'C', 1);
             $pdf->Cell(35, 6, 'Nom Cliente', 1, 0, 'C', 1);
@@ -49,8 +49,8 @@
                     $pdf->Cell(25, 6, $fila["IdVenta"], 1, 0, 'C', 1);
                     $pdf->Cell(50, 6, $fechaexa, 1, 0, 'C', 1);
                     $pdf->Cell(25, 6, $fila["dnis"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, utf8_decode($fila["cliente"]), 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, $fila["empl"].'-'.utf8_decode($fila["nempl"]), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, mb_convert_encoding($fila["cliente"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 6, $fila["empl"].'-'.mb_convert_encoding($fila["nempl"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
                     $pdf->Cell(20, 6, '$ '.$fila["Total"], 1, 1, 'C', 1);
                 }
                 $pdf->Output('', 'ventas_completo.pdf');
