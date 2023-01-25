@@ -19,31 +19,6 @@ La pantalla principal del sistema depende del tipo de rol del usuario, ya que la
 ![Captura del Dashboard principal](img/index.jpg)
 > Pantalla principal
 
-## Instalación
-
-Tener el servidor web Apache y un sistema de gestión de base de datos (XAMPP/LAMP/MAMP).
-
-* Crear una base de datos
-
-```
-create database gimnasio
-```
-
-* Cargar el código del archivo **BD_gimnasio.sql**
-
-* Crear un archivo **.env**
-
-* Copiar las variables del archivo **.example.env** y pegar en **.env** completando con los datos de conexión
-
-```
-HOST =         // Tipo de host
-DB_USER =      // Nombre de usuario
-DB_PASSWORD =  // Contraseña
-DB_NAME =      // Nombre de base de datos
-```
-
-* Mover los archivos a la carpeta de lectura del servidor
-
 ## Recursos
 
 Se utilizó la biblioteca fpdf para los reportes en formato excel y pdf.
