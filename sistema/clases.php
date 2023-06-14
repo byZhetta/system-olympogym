@@ -14,10 +14,10 @@
     <?php include "includes/header.php"; ?>
 	<section id="container">
 
-		<h1>CLASES DEPORTIVAS</h1>
+		<h1>Membresias</h1>
 
         <div class="form_search">
-            <a href="registro_clase.php" class="btn_new"><i class="fas fa-plus"></i> Crear Clase nueva</a>
+            <a href="registro_clase.php" class="btn_new"><i class="fas fa-plus"></i> Crear nueva membresía</a>
         </div>
             
     <div class="containerTable">

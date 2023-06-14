@@ -43,13 +43,13 @@
 	<section id="container">
 
         <div class="form_register">
-            <h1>Crear Clase deportiva</h1>
+            <h1>Crear tipo de membresía</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
             <form action="" method="post">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre de la Clase">
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre de la Membresía">
                 <label for="dias">Dias</label>
                 <input type="text" name="dias" id="dias" placeholder="Ingrese los Dias ej. Lun, Mar, Mie, Jue, Vie, Sab">
                 <label for="hora">Hora</label>
@@ -78,7 +78,7 @@
                         }
                     ?>
                 </select><br>
-                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Crear Clase</button>
+                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Crear Membresia</button>
                 <a href="clases.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
 
