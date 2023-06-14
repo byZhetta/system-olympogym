@@ -65,7 +65,7 @@
                             <td><?php echo $data["Dias"]; ?></td>
                             <td><?php echo $data["Hora"]; ?></td>
                             <td><?php echo $data["Duracion"]; ?></td>
-                            <td>$ <?php echo $data["Costo_Clase"]; ?></td>
+                            <td>S/.<?php echo $data["Costo_Clase"]; ?></td>
                             <td>
                                 <a class="link_edit" href="editar_clase.php?id=<?php echo $data["IdClase"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 <?php if($_SESSION['rol'] == 1){ ?>	

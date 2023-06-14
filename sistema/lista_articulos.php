@@ -83,7 +83,7 @@
                             <td><?php echo $data["Descripcion"]; ?></td>
                             <td><?php echo $data["Marca"]; ?></td>
                             <td><?php echo $data["Cantidad"]; ?></td>
-                            <td>$ <?php echo $data["Precio_Unitario"]; ?></td>
+                            <td>S/.<?php echo $data["Precio_Unitario"]; ?></td>
                             <td><?php echo $data["Nombre"]; ?></td>
                             <td>
                                 <a class="link_edit" href="editar_articulo.php?id=<?php echo $data["IdArticulo"]; ?>"><i class="far fa-edit"></i> Editar</a>

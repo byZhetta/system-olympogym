@@ -83,7 +83,7 @@
                             <td><?php echo $data["dnis"]; ?></td>
                             <td><?php echo $data["cliente"]; ?></td>
                             <td><?php echo $data["empl"]; ?>-<?php echo $data["nempl"]; ?></td>
-                            <td><span>$ </span><?php echo $data["Total"]; ?></td>
+                            <td><span>S/.</span><?php echo $data["Total"]; ?></td>
                             <td>
                                 <div class="div_acciones">
                                     <div>

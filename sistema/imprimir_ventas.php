@@ -51,7 +51,7 @@
                     $pdf->Cell(25, 6, $fila["dnis"], 1, 0, 'C', 1);
                     $pdf->Cell(35, 6, mb_convert_encoding($fila["cliente"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
                     $pdf->Cell(35, 6, $fila["empl"].'-'.mb_convert_encoding($fila["nempl"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
-                    $pdf->Cell(20, 6, '$ '.$fila["Total"], 1, 1, 'C', 1);
+                    $pdf->Cell(20, 6, 'S/. '.$fila["Total"], 1, 1, 'C', 1);
                 }
                 $pdf->Output('', 'ventas_completo.pdf');
                 // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"
@@ -117,7 +117,7 @@
                         echo            $fila["empl"].'-'.$fila["nempl"];
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
-                        echo            '$ '.$fila["Total"];
+                        echo            'S/. '.$fila["Total"];
                         echo        "<td>";
                         echo    "<tr>";                                                                    
                     }
