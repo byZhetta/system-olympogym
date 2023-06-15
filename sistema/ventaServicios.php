@@ -159,7 +159,7 @@
 								$alert='<p class="msg_aviso_ok">
 								Venta de servicio realizada !!
 								</br>
-								El total a abonar es de $'.$total.'</p></br>';
+								El total a abonar es de S/.'.$total.'</p></br>';
 
 								// Esta variable permite mostrar el botón "Imprimir"
 								$grabadoConExito=true;

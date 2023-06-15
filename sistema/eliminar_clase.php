@@ -60,7 +60,7 @@
             <h2>¿Está suguro de eliminar el siguiente registro?</h2>
             <p>Nombre: <span><?php echo $nombre; ?></span></p>
             <p>Duración: <span><?php echo $duracion; ?></span></p>
-            <p>Costo: <span>$ <?php echo $costo; ?></span></p>
+            <p>Costo: <span>S/.<?php echo $costo; ?></span></p>
 
             <form method="post" action="">
                 <input type="hidden" name="idClase" value="<?php echo $idClase; ?>">
