@@ -49,7 +49,7 @@
 	<section id="container">
 
         <div class="form_register">
-            <h1>Registro de socio</h1>
+            <h1>Registro de cliente</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
@@ -64,7 +64,7 @@
                 <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
                 <label for="correo">Email</label>
                 <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico"><br> 
-                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar Socio</button>
+                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar CLiente</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
 
