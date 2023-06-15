@@ -25,9 +25,6 @@
             <tr>
                 <th>Nro.</th>
                 <th>Nombre</th>
-                <th>Instructor</th>
-                <th>Dias</th>
-                <th>Hora</th>
                 <th>Duración</th>
                 <th>Precio</th>
                 <th>Acciones</th>
@@ -49,8 +46,8 @@
                 $desde = ($pagina-1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
-                $query = mysqli_query($conexionDB,"SELECT c.IdClase, c.NombreC, c.Dias, c.Hora, c.Duracion, c.Costo_Clase, i.Nombre 
-                                                    FROM clases c INNER JOIN instructores i ON c.Cod_Instructor = i.Id_Instructor
+                $query = mysqli_query($conexionDB,"SELECT c.IdClase, c.NombreC, c.Duracion, c.Costo_Clase 
+                                                    FROM clases as c
                                                     ORDER BY c.IdClase ASC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
@@ -61,9 +58,6 @@
                         <tr>
                             <td><?php echo $data["IdClase"]; ?></td>
                             <td><?php echo $data["NombreC"]; ?></td>
-                            <td><?php echo $data["Nombre"]; ?></td>
-                            <td><?php echo $data["Dias"]; ?></td>
-                            <td><?php echo $data["Hora"]; ?></td>
                             <td><?php echo $data["Duracion"]; ?></td>
                             <td>S/.<?php echo $data["Costo_Clase"]; ?></td>
                             <td>

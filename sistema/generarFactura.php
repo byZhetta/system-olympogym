@@ -27,8 +27,7 @@
 					WHERE f.IdVenta = $noFactura";
 	$queryprod = $conexionDB->query($sqlp);
 
-	$sqlm = "SELECT cl.IdClase, cl.NombreC, cl.Dias, DATE_FORMAT(cl.Hora,'%H:%i') as Hora, 
-					DATE_FORMAT(cl.Duracion,'%H:%i') as Duracion, cl.Costo_Clase, 
+	$sqlm = "SELECT cl.IdClase, cl.NombreC, cl.Duracion, cl.Costo_Clase, 
 					dts.Periodo, DATE_FORMAT(dts.Fecha_Alta,'%d-%m-%Y') as FechaAlta, 
 					DATE_FORMAT(dts.Fecha_Vencim,'%d-%m-%Y') as FechaBaja, f.Total FROM ventas f 
 					INNER JOIN detalle_venta_servicios dts ON f.IdVenta = dts.Cod_Venta
@@ -76,8 +75,7 @@
             $pdf->Cell(28,6,'S/. '.$fila["Total"],1,1,'R',1);
 			$pdf->Cell(17);
             $pdf->Cell(58,6,'Desde: '.$fila["FechaAlta"].' Hasta: '.$fila["FechaBaja"],1,0,'C',1);
-            $pdf->Cell(64,6,$fila["Dias"],1,0,'C',1);
-            $pdf->Cell(50,6,'Hora: '.$fila["Hora"].' Tiempo: '.$fila["Duracion"],1,0,'C',1);
+            $pdf->Cell(50,6,mb_convert_encoding(' Duración: ', 'ISO-8859-1', 'UTF-8').$fila["Duracion"],1,0,'C',1);
             $total = $fila["Total"];
         }
         
