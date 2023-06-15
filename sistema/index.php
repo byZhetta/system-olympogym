@@ -43,7 +43,7 @@
 				<a href="lista_socio.php">
 				    <i class="fas fa-users"></i>
 					<p>
-					    <strong>Socios</strong><br>
+					    <strong>Clientes</strong><br>
 						<span><?= $data_dash['socios']; ?></span>
 					</p>
 				</a>
