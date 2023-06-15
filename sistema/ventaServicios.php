@@ -214,7 +214,7 @@
 					<br>
 				</div>
 				<div class="wd40">
-                	<label for="clase">Clase</label>
+                	<label for="clase">Membresia</label>
 					<select id="clase" name="nombredeClase">
 						<option value="" selected="selected">-selecciona-</option>
 						<?php
