@@ -31,6 +31,8 @@
 			// Para rellenar la lista desplegable del formulario
 			$listaClases = "SELECT NombreC FROM clases";
 			$listaClases = $conexionDB->query($listaClases);
+			$listaClientes = "SELECT Nombre, Dni From socios";
+			$listaClientes = $conexionDB->query($listaClientes);
 			$grabadoConExito=false;
 
 			// Si el formulario fue enviado, procesa los datos
@@ -78,6 +80,15 @@
 				} else {
 					$periodo = $conexionDB->escape_string($_POST['periodo']);
 				}
+				// Recibe el descuento dado
+				if ($inputError != true && empty($_POST['periodo'])){
+					$alert='<p class="msg_error">
+					ERROR: Por favor ingrese un valor válido
+					</p></br>'; 
+					$inputError = true;
+				} else {
+					$descuento = $conexionDB->escape_string($_POST['descuento']);
+				}
 
 				// añade valores a la base de datos utilizando la consulta INSERT
 				if ($inputError != true) {
@@ -105,15 +116,15 @@
 					// b) Reconvertir el periodo numérico a texto
 					// c) Calcular la fecha de vencimiento
 					switch ($periodo){
-						case 1: $total= $costo*1;
+						case 1: $total= $costo*1 - $descuento;
 								$periodo= 'Diario';
 								$fechaVenc=date ("Y/m/j", strtotime('1 day'));
 							break;
-						case 2: $total= $costo*3;
+						case 2: $total= $costo*1 - $descuento;
 								$periodo= 'Semanal';
 								$fechaVenc=date ("Y/m/j", strtotime('1 week'));
 							break;
-						case 3: $total= $costo*12;
+						case 3: $total= $costo*1 - $descuento;
 								$periodo= 'Mensual';
 								$fechaVenc=date ("Y/m/j", strtotime('1 month'));
 							break;
@@ -204,16 +215,25 @@
         <div class="datos_venta">
 			<h4>Datos de Venta</h4>
 			<form action="ventaServicios.php" method="post" class="datos">
-				<div class="wd40">
+				<div class="wd100">
 					<label>Vendedor</label>
 					<p><?php echo $_SESSION['nombre']; ?></p>
 				</div>
-				<div class="wd40">
-                	<label for="socio">DNI del Socio</label>
-					<input type="number" name="dnideSocio" placeholder="Ingrese el DNI"/>
+				<div class="wd25">
+                	<label for="socio">DNI del Cliente</label>
+					<select id="socio" name="dnideSocio">
+						<option value="" selected="selected">-selecciona-</option>
+						<?php
+							if ($listaClientes->num_rows > 0) {
+								while ($fila = $listaClientes->fetch_assoc()) {
+									echo '<option value="'.$fila["Dni"].'">'.$fila["Dni"]." - ".$fila["Nombre"]."</option>";
+								}
+							}
+						?>
+					</select>
 					<br>
 				</div>
-				<div class="wd40">
+				<div class="wd25">
                 	<label for="clase">Membresia</label>
 					<select id="clase" name="nombredeClase">
 						<option value="" selected="selected">-selecciona-</option>
@@ -226,7 +246,7 @@
 						?>
 					</select>
 				</div>
-				<div class="wd40">
+				<div class="wd25">
 					<label for="periodo">Periodo</label>
 					<select id="periodo" name="periodo">
 						<option value="" selected="selected">-selecciona-</option>
@@ -234,7 +254,12 @@
 						<option value="2">Semanal</option>
 						<option value="3">Mensual</option>
 					</select>
-					<br><br>
+					
+				</div>
+				<div class="wd100">
+                	<label for="descuento">Descuento</label>
+					<input type="number" name="descuento" placeholder="Ingrese el descuento" value="0"/>
+					<br>
 				</div>
 				<div class="wd30">
 					<button type="submit" class="link_addone" name="confirmar"><i class="far fa-check-circle"></i> Confirmar</button>
