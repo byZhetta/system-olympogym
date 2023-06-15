@@ -45,7 +45,7 @@
                     $pdf->Cell(30, 6, $fila["Direccion"], 1, 0, 'C', 1);
                     $pdf->Cell(20, 6, $fila["Telefono"], 1, 0, 'C', 1);
                     $pdf->Cell(40, 6, $fila["Email"], 1, 0, 'C', 1);
-                    $pdf->Cell(20, 6, '$ '.$fila["Sueldo"], 1, 1, 'C', 1);
+                    $pdf->Cell(20, 6, 'S/. '.$fila["Sueldo"], 1, 1, 'C', 1);
                 }
                 $pdf->Output('', 'instructores_completo.pdf');
                 // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"

@@ -57,13 +57,13 @@
 	<section id="container">
 
         <div class="form_register">
-            <h1 style="color: red";>Egreso de dinero ($)</h1>
+            <h1 style="color: red";>Egreso de dinero (S/.)</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
             <form action="" method="post">
                 <label for="sueldo">Importe: </label>
-                <input type="number" min="0.00" name="sueldo" id="sueldo" placeholder="Ingrese el importe ($)"> 
+                <input type="number" min="0.00" name="sueldo" id="sueldo" placeholder="Ingrese el importe (S/.)"> 
                 <br>
                 <button type="submit" class="link_edit"><i class="fas fa-cash-register"></i> Cerrar Caja</button>
                 <a href="lista_caja.php" class="link_delete" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>

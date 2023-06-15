@@ -14,7 +14,7 @@
 
 
         <p><?php echo $resultado["IdArticulo"]; ?> - <?php echo $resultado["Descripcion"] ?> - 
-        <?php echo $resultado["Marca"] ?> - $ <?php echo $resultado["Precio_Unitario"] ?></p>
+        <?php echo $resultado["Marca"] ?> - S/.<?php echo $resultado["Precio_Unitario"] ?></p>
 
 
 <?php } ?>

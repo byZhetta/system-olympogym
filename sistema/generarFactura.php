@@ -47,8 +47,8 @@
             $pdf->Cell(17,6,$fila["IdArticulo"],1,0,'C',1);
             $pdf->Cell(99,6,mb_convert_encoding($fila["Descripcion"], 'ISO-8859-1', 'UTF-8').' - '.$fila["Marca"],1,0,'',1);
             $pdf->Cell(17,6,$fila["Cantidad"],1,0,'C',1);
-            $pdf->Cell(28,6,'$ '.$fila["precio_venta"],1,0,'R',1);
-            $pdf->Cell(28,6,'$ '.$fila["precio_total"],1,1,'R',1);
+            $pdf->Cell(28,6,'S/. '.$fila["precio_venta"],1,0,'R',1);
+            $pdf->Cell(28,6,'S/. '.$fila["precio_total"],1,1,'R',1);
             $total = $fila["Total"];
         }
         
@@ -58,7 +58,7 @@
         $pdf->SetFillColor(210,210,210);
         $pdf->Cell(30,6,'Importe Total',1,0,'',1);
 		$pdf->SetFillColor(255,255,255);
-        $pdf->Cell(30,6,'$ '.$total,1,1,'R',1);
+        $pdf->Cell(30,6,'S/. '.$total,1,1,'R',1);
         
         $pdf->Output('', 'Factura Electronica N° '.$noFactura.'.pdf');
     } else {
@@ -72,8 +72,8 @@
             $pdf->Cell(17,12,$fila["IdClase"],1,0,'C',1);
             $pdf->Cell(99,6,mb_convert_encoding($fila["NombreC"], 'ISO-8859-1', 'UTF-8').' - Periodo: '.$fila["Periodo"],1,0,'',1);
             $pdf->Cell(17,6,' 1 ',1,0,'C',1);
-            $pdf->Cell(28,6,'$ '.$fila["Costo_Clase"],1,0,'R',1);
-            $pdf->Cell(28,6,'$ '.$fila["Total"],1,1,'R',1);
+            $pdf->Cell(28,6,'S/. '.$fila["Costo_Clase"],1,0,'R',1);
+            $pdf->Cell(28,6,'S/. '.$fila["Total"],1,1,'R',1);
 			$pdf->Cell(17);
             $pdf->Cell(58,6,'Desde: '.$fila["FechaAlta"].' Hasta: '.$fila["FechaBaja"],1,0,'C',1);
             $pdf->Cell(64,6,$fila["Dias"],1,0,'C',1);
@@ -87,7 +87,7 @@
         $pdf->SetFillColor(210,210,210);
         $pdf->Cell(30,6,'Importe Total',1,0,'',1);
 		$pdf->SetFillColor(255,255,255);
-        $pdf->Cell(30,6,'$ '.$total,1,1,'R',1);
+        $pdf->Cell(30,6,'S/. '.$total,1,1,'R',1);
         
         $pdf->Output('', 'Factura Electronica N° '.$noFactura.'.pdf');
     }

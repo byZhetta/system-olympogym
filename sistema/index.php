@@ -138,7 +138,7 @@
 					    <label>Usuario: </label><span><?= $_SESSION['user']; ?></span>
 					</div>
 					<div>
-					    <label>Saldo Total: </label><span>$ <?= $igual; ?></span>
+					    <label>Saldo Total: </label><span>S/. <?= $igual; ?></span>
 					</div>
 				<?php 
 				    include "../conexion.php"; 
