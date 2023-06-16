@@ -128,6 +128,18 @@
 								$periodo= 'Mensual';
 								$fechaVenc=date ("Y/m/j", strtotime('1 month'));
 							break;
+						case 4: $total= $costo*1 - $descuento;
+								$periodo= 'trimestral';
+								$fechaVenc=date ("Y/m/j", strtotime('3 month'));
+							break;
+						case 5: $total= $costo*1 - $descuento;
+								$periodo= 'Semestral';
+								$fechaVenc=date ("Y/m/j", strtotime('6 month'));
+							break;
+						case 6: $total= $costo*1 - $descuento;
+								$periodo= 'Anual';
+								$fechaVenc=date ("Y/m/j", strtotime('12 month'));
+							break;
 					}
 
 					//id usuario
@@ -253,6 +265,10 @@
 						<option value="1">Diario</option>
 						<option value="2">Semanal</option>
 						<option value="3">Mensual</option>
+						<option value="4">Trimentral</option>
+						<option value="5">Semestral</option>
+						<option value="6">Anual</option>
+						
 					</select>
 					
 				</div>

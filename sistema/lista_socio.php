@@ -33,6 +33,10 @@
                 <th>Dirección</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Membresia</th>
+                <th>F. Inicio</th>
+                <th>F. Final</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
             <?php
@@ -52,8 +56,13 @@
                 $desde = ($pagina-1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
-                $query = mysqli_query($conexionDB,"SELECT * FROM socios
-                                                    ORDER BY Id_Socio DESC LIMIT $desde,$por_pagina");
+                $query = mysqli_query($conexionDB,"SELECT DISTINCT s.Nombre, s.Id_Socio,  s.Dni,   
+                                                    s.Direccion, s.Telefono, s.Email, c.NombreC, dvs.Fecha_Alta,
+                                                    dvs.Fecha_Vencim FROM socios s   
+                                                    INNER JOIN ventas v ON v.Cod_Socio = s.Id_Socio
+                                                    INNER JOIN detalle_venta_servicios dvs on v.IdVenta = dvs.Cod_Venta
+                                                    INNER JOIN clases c ON DVS.Cod_Clase = C.IdClase
+                                                    ORDER BY s.Id_Socio DESC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
                 if($result > 0){
@@ -67,6 +76,18 @@
                             <td><?php echo $data["Direccion"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
                             <td><?php echo $data["Email"]; ?></td>
+                            <td><?php echo $data["NombreC"]; ?></td>
+                            <td><?php echo $data["Fecha_Alta"]; ?></td>
+                            <td><?php echo $data["Fecha_Vencim"]; ?></td>
+                            <td>    
+                                <?php 
+                                    if(date('Y-m-d') > $data["Fecha_Vencim"]){
+                                        echo "Vencido"; 
+                                    }else{
+                                        echo "Activo"; 
+                                    }
+                                ?>
+                            </td>
                             <td>
                                 <a class="link_edit" href="editar_socio.php?id=<?php echo $data["Id_Socio"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 |
