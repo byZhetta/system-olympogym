@@ -4,39 +4,12 @@
     session_start();
 
     $listaClases = "SELECT NombreC FROM clases";
-	$listaClases = $conexionDB->query($listaClases);
-
-    switch ($periodo){
-        case 1: $total= $costo*1 - $descuento;
-                $periodo= 'Diario';
-                $fechaVenc=date ("Y/m/j", strtotime('1 day'));
-            break;
-        case 2: $total= $costo*1 - $descuento;
-                $periodo= 'Semanal';
-                $fechaVenc=date ("Y/m/j", strtotime('1 week'));
-            break;
-        case 3: $total= $costo*1 - $descuento;
-                $periodo= 'Mensual';
-                $fechaVenc=date ("Y/m/j", strtotime('1 month'));
-            break;
-        case 4: $total= $costo*1 - $descuento;
-                $periodo= 'trimestral';
-                $fechaVenc=date ("Y/m/j", strtotime('3 month'));
-            break;
-        case 5: $total= $costo*1 - $descuento;
-                $periodo= 'Semestral';
-                $fechaVenc=date ("Y/m/j", strtotime('6 month'));
-            break;
-        case 6: $total= $costo*1 - $descuento;
-                $periodo= 'Anual';
-                $fechaVenc=date ("Y/m/j", strtotime('12 month'));
-            break;
-    }
+    $listaClases = $conexionDB->query($listaClases);
 
     if(!empty($_POST)){
         $alert='';
         if(empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['direccion']) ||
-           empty($_POST['telefono']) || empty($_POST['correo']) ){
+           empty($_POST['telefono']) || empty($_POST['correo']) || empty($_POST['membresia']) ){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
@@ -45,6 +18,34 @@
             $direccion = $_POST['direccion'];
             $telefono = $_POST['telefono'];
             $email = $_POST['correo'];
+            $membresia = $_POST['membresia'];
+            $fecha_ingreso = date("Y-m-d");
+
+            // Consultar id de clase
+			$consultaCodClase="SELECT IdClase FROM clases
+                                WHERE NombreC = '$membresia'";
+            $codClase=( ( $conexionDB->query($consultaCodClase) )->fetch_object() )->IdClase;
+
+            switch ($membresia){
+                case 'Diario': 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 day'));
+                    break;
+                case 'Semanal': 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 week'));
+                    break;
+                case 'Mensual': 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
+                    break;
+                case 'Trimestral': 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('3 month'));
+                    break;
+                case 'Semestral': 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('6 month'));
+                    break;
+                case 'Anual': 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('12 month'));
+                    break;
+            }
 
             $query = mysqli_query($conexionDB,"SELECT * FROM socios WHERE Dni = '$dni' OR Email = '$email' ");
             $result = mysqli_fetch_array($query);
@@ -52,8 +53,8 @@
             if($result > 0){
                 $alert = '<p class="msg_error">El DNI o el correo ya existe.</p>';
             } else {
-                $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Direccion,Telefono,Email)
-                                                        VALUES('$nombre','$dni','$direccion','$telefono','$email')");
+                $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Direccion,Telefono,Email,fecha_ingreso,fecha_vencimiento,Id_Clase)
+                                                        VALUES('$nombre','$dni','$direccion','$telefono','$email','$fecha_ingreso','$fecha_vencimiento','$codClase')");
                 
                 if($query_insert){
                     $alert = '<p class="msg_save">Socio guardado correctamente.</p>';
@@ -95,8 +96,8 @@
                 <label for="correo">Email</label>
                 <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico">
                 <div class="">
-                	<label for="clase">Membresia</label>
-					<select id="clase" name="nombredeClase">
+                	<label for="membresia">Membresia</label>
+					<select id="membresia" name="membresia">
 						<option value="" selected="selected">-selecciona-</option>
 						<?php
 							if ($listaClases->num_rows > 0) {
@@ -106,7 +107,7 @@
 							}
 						?>
 					</select>
-				</div><br>
+				</div><br> 
                 <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar CLiente</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
