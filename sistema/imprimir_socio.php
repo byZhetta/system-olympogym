@@ -19,15 +19,18 @@
             $pdf->Ln(10);
                 // dejo un espacio de 10
             $pdf->Cell(12, 6, 'Nro.', 1, 0, 'C', 1);
-            $pdf->Cell(35, 6, 'Nombre', 1, 0, 'C', 1);
-            $pdf->Cell(30, 6, 'Dni', 1, 0, 'C', 1);
-            $pdf->Cell(35, 6, 'Direccion', 1, 0, 'C', 1);
+            $pdf->Cell(45, 6, 'Nombre', 1, 0, 'C', 1);
+            $pdf->Cell(20, 6, 'Dni', 1, 0, 'C', 1);
             $pdf->Cell(20, 6, 'Telefono', 1, 0, 'C', 1);
-            $pdf->Cell(40, 6, 'Email', 1, 1, 'C', 1);
+            $pdf->Cell(30, 6, mb_convert_encoding('Membresía', 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+            $pdf->Cell(20, 6, 'F. Inicio', 1, 0, 'C', 1);
+            $pdf->Cell(20, 6, 'F. Final', 1, 0, 'C', 1);
+            $pdf->Cell(20, 6, 'Estado', 1, 1, 'C', 1);
                 // son los Títulos de la tabla
                 //     ancho/ alto/ texto/ borde/ salto de línea/ Centrado
 
-            $sql = "SELECT * FROM socios";
+            $sql = "SELECT * FROM socios s
+                    INNER JOIN clases c ON s.Id_Clase = c.IdClase";
             $queryArticulos = $conexionDB->query($sql);
             if ($queryArticulos->num_rows > 0)
             {
@@ -40,11 +43,17 @@
                 {
                     // recorro el query imprimiendo los campos
                     $pdf->Cell(12, 6, $fila["Id_Socio"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
-                    $pdf->Cell(30, 6, $fila["Dni"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+                    $pdf->Cell(45, 6, mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+                    $pdf->Cell(20, 6, $fila["Dni"], 1, 0, 'C', 1);
                     $pdf->Cell(20, 6, $fila["Telefono"], 1, 0, 'C', 1);
-                    $pdf->Cell(40, 6, $fila["Email"], 1, 1, 'C', 1);
+                    $pdf->Cell(30, 6, $fila["NombreC"], 1, 0, 'C', 1);
+                    $pdf->Cell(20, 6, $fila["fecha_ingreso"], 1, 0, 'C', 1);
+                    $pdf->Cell(20, 6, $fila["fecha_vencimiento"], 1, 0, 'C', 1);
+                    if(date('Y-m-d') > $fila['fecha_vencimiento']){
+                        $pdf->Cell(20, 6, 'Vencido', 1, 1, 'C', 1);
+                    }else{
+                        $pdf->Cell(20, 6, 'Activo', 1, 1, 'C', 1);
+                    }
                 }
                 $pdf->Output('', 'articulos_completo.pdf');
                 // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"
