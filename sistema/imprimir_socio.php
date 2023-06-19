@@ -70,52 +70,72 @@
                 header('Content-Disposition: attachment;filename=reporteSocio.xls');
                 header('Pragma: no-cache');
                 header('Expires: 0');
-                $sql = "SELECT * FROM socios";
+                $sql = "SELECT * FROM socios s
+                        INNER JOIN clases c ON s.Id_Clase = c.IdClase";
                 $queryArticulos = $conexionDB->query($sql);
                 if ($queryArticulos->num_rows > 0)
                 {
                     echo "<table border-\"0\"; border-color- \"black\">";
                     echo    "<tr style=\"background-color: beige\">";
-                    echo        "<td style=\"width:100px\">";
+                    echo        "<td style=\"width:50px\">";
                     echo            "Nro.";
                     echo        "<td>";
                     echo        "<td style=\"width:200px\">";
                     echo            "Nombre";
                     echo        "<td>";
-                    echo        "<td style=\"width:100px\">";
+                    echo        "<td style=\"width:80px\">";
                     echo            "Dni";
                     echo        "<td>";
-                    echo        "<td style=\"width:150px\">";
-                    echo            mb_convert_encoding("Dirección", 'ISO-8859-1', 'UTF-8');
-                    echo        "<td>";
-                    echo        "<td style=\"width:100px\">";
+                    echo        "<td style=\"width:80px\">";
                     echo            mb_convert_encoding("Teléfono", 'ISO-8859-1', 'UTF-8');
                     echo        "<td>";
-                    echo        "<td style=\"width:230px\">";
-                    echo            "Email";
+                    echo        "<td style=\"width:80px\">";
+                    echo            mb_convert_encoding("Membresía", 'ISO-8859-1', 'UTF-8');
+                    echo        "<td>";
+                    echo        "<td style=\"width:80px\">";
+                    echo            "F. Inicio";
+                    echo        "<td>";
+                    echo        "<td style=\"width:80px\">";
+                    echo            "F. Final";
+                    echo        "<td>";
+                    echo        "<td style=\"width:60px\">";
+                    echo            "Estado";
                     echo        "<td>";
                     echo    "<tr>";
                     while ($fila = $queryArticulos->fetch_assoc())
                     {
                         echo    "<tr>";
-                        echo        "<td style=\"width:100px\">";
+                        echo        "<td style=\"width:50px\">";
                         echo            $fila["Id_Socio"];
                         echo        "<td>";
                         echo        "<td style=\"width:200px\">";
                         echo             mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8');
                         echo        "<td>";
-                        echo        "<td style=\"width:100px\">";
+                        echo        "<td style=\"width:50px\">";
                         echo            $fila["Dni"];
                         echo        "<td>";
-                        echo        "<td style=\"width:150px\">";
-                        echo            mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8');
-                        echo        "<td>";
-                        echo        "<td style=\"width:100px\">";
+                        echo        "<td style=\"width:50px\">";
                         echo            $fila["Telefono"];
                         echo        "<td>";
-                        echo        "<td style=\"width:230px\">";
-                        echo            $fila["Email"];
+                        echo        "<td style=\"width:50px\">";
+                        echo            mb_convert_encoding($fila["NombreC"], 'ISO-8859-1', 'UTF-8');
                         echo        "<td>";
+                        echo        "<td style=\"width:50px\">";
+                        echo            $fila["fecha_ingreso"];
+                        echo        "<td>";
+                        echo        "<td style=\"width:50px\">";
+                        echo            $fila["fecha_vencimiento"];
+                        echo        "<td>";
+                        if(date('Y-m-d') > $fila['fecha_vencimiento']){
+                            echo        "<td style=\"width:50px\">";
+                            echo            'Vencido';
+                            echo        "<td>";
+                        }else{
+                            echo        "<td style=\"width:50px\">";
+                            echo            'Activo';
+                            echo        "<td>";
+                        }
+                        
                         echo    "<tr>";                                                                    
                     }
                     echo    "</table>";                                                                    
