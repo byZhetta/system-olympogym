@@ -56,13 +56,8 @@
                 $desde = ($pagina-1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
-                $query = mysqli_query($conexionDB,"SELECT DISTINCT s.Dni, s.Nombre, s.Id_Socio,   
-                                                    s.Direccion, s.Telefono, s.Email, c.NombreC, dvs.Fecha_Alta,
-                                                    dvs.Fecha_Vencim FROM socios s   
-                                                    INNER JOIN ventas v ON v.Cod_Socio = s.Id_Socio
-                                                    INNER JOIN detalle_venta_servicios dvs on v.IdVenta = dvs.Cod_Venta
-                                                    INNER JOIN clases c ON dvs.Cod_Clase = c.IdClase
-                                                    GROUP BY s.Dni
+                $query = mysqli_query($conexionDB,"SELECT * FROM socios s   
+                                                    INNER JOIN clases c ON s.Id_Clase = c.IdClase
                                                     ORDER BY s.Id_Socio DESC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
@@ -78,11 +73,11 @@
                             <td><?php echo $data["Telefono"]; ?></td>
                             <td><?php echo $data["Email"]; ?></td>
                             <td><?php echo $data["NombreC"]; ?></td>
-                            <td><?php echo $data["Fecha_Alta"]; ?></td>
-                            <td><?php echo $data["Fecha_Vencim"]; ?></td>
+                            <td><?php echo $data["fecha_ingreso"]; ?></td>
+                            <td><?php echo $data["fecha_vencimiento"]; ?></td>
                             <td>    
                                 <?php 
-                                    if(date('2023-06-17') > $data["Fecha_Vencim"]){
+                                    if(date('Y-m-d') > $data["fecha_vencimiento"]){
                                         echo "Vencido"; 
                                     }else{
                                         echo "Activo"; 

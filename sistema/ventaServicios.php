@@ -268,9 +268,7 @@
 						<option value="4">Trimentral</option>
 						<option value="5">Semestral</option>
 						<option value="6">Anual</option>
-						
 					</select>
-					
 				</div>
 				<div class="wd100">
                 	<label for="descuento">Descuento</label>
