@@ -20,33 +20,45 @@
             $email = $_POST['correo'];
             $membresia = $_POST['membresia'];
             $fecha_ingreso = date("Y-m-d");
+            $descuento = $_POST['descuento'];
 
             // Consultar id de clase
 			$consultaCodClase="SELECT IdClase FROM clases
                                 WHERE NombreC = '$membresia'";
             $codClase=( ( $conexionDB->query($consultaCodClase) )->fetch_object() )->IdClase;
 
+            // Consultar costo de clase
+            $consultaCosto="SELECT Costo_Clase FROM clases
+                            WHERE NombreC = '$membresia'";
+            $costo=( ( $conexionDB->query($consultaCosto) )->fetch_object() )->Costo_Clase;
+
             switch ($membresia){
-                case 'Diario': 
+                case 'Diario':
+                        $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 day'));
                     break;
-                case 'Semanal': 
+                case 'Semanal':
+                        $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 week'));
                     break;
-                case 'Mensual': 
+                case 'Mensual':
+                        $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
                     break;
-                case 'Trimestral': 
+                case 'Trimestral':
+                        $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('3 month'));
                     break;
-                case 'Semestral': 
+                case 'Semestral':
+                        $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('6 month'));
                     break;
-                case 'Anual': 
+                case 'Anual':
+                        $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('12 month'));
                     break;
             }
-
+            
             $query = mysqli_query($conexionDB,"SELECT * FROM socios WHERE Dni = '$dni' OR Email = '$email' ");
             $result = mysqli_fetch_array($query);
 
@@ -62,6 +74,70 @@
                     $alert = '<p class="msg_error">Error al guardar el socio.</p>';
                 }
             }
+
+            // Consultar id de socio
+            $consultaCodSocio="SELECT Id_Socio FROM socios
+                             WHERE Dni = '$dni'";
+            $codSocio=( ( $conexionDB->query($consultaCodSocio) )->fetch_object() )->Id_Socio;
+
+            //id usuario
+            $usuario = $_SESSION['idUser'];
+
+            //sumar total en caja
+            $saldcaja = mysqli_query($conexionDB,"SELECT SUM(Total_caja) + '$total' as total FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja)");
+            $data = mysqli_fetch_array($saldcaja);
+            $totalcaja = $data['total'];
+
+            //inserta datos de venta en caja
+            $insercaja=mysqli_query($conexionDB,"INSERT INTO caja (Actividad,Monto_inicial,Total_caja,Cod_Empleado,Estado) 
+                                                            VALUES ('Venta de Servicio', '$total', '$totalcaja', '$usuario', 'Abierto')");
+
+            // Consutar id de caja
+            $consultaCodCaja="SELECT MAX(IdCaja) as IdCaja FROM caja WHERE Actividad = 'Venta de Servicio'";
+            $codCaja=( ( $conexionDB->query($consultaCodCaja) )->fetch_object() )->IdCaja;
+
+            // INICIA EL BLOQUE DE TRANSACCIÓN
+            try {					    
+                $conexionDB->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
+
+                $instruccSQL="INSERT INTO ventas (Cod_Caja, Cod_Socio, Total) 
+                                VALUES ('$codCaja', '$codSocio', '$total')";
+                // Ejecutar la operación
+                $queryVentas=$conexionDB->query($instruccSQL);
+                if (!$queryVentas)
+                    throw new Exception($conexionDB->error);
+                else {
+                    $instruccSQL="INSERT INTO detalle_venta_servicios (Cod_Venta, Cod_Clase, Periodo, Fecha_Alta, Fecha_Vencim, Total)
+                                    VALUES (".$conexionDB->insert_id.", '$codClase', '$membresia', '$fecha_ingreso', '$fecha_vencimiento', '$costo')";
+                    // Ejecutar la operación
+                    $queryVentas_Item=$conexionDB->query($instruccSQL);
+                    if (!$queryVentas_Item)
+                        throw new Exception($conexionDB->error);
+                    else{
+                        $conexionDB->commit();
+
+                        $alert='<p class="msg_aviso_ok">
+                        Venta de servicio realizada !!
+                        </br>
+                        El total a abonar es de S/.'.$total.'</p></br>';
+
+                        // Esta variable permite mostrar el botón "Imprimir"
+                        $grabadoConExito=true;
+
+                        // Obtener el núm de la factura
+                        $consulta="SELECT IdVenta FROM ventas
+                                    WHERE Cod_Socio = '$codSocio'
+                                    AND Total = '$total' ";
+                        $numFactura=( ( $conexionDB->query($consulta) )->fetch_object() )->IdVenta;
+                    }
+                }
+            } catch (Exception $ex) {
+                $conexionDB->rollback();
+                $alert='<p class="msg_error">Ocurrió un error al intentar grabar la Venta!!'. $ex->getMessage() .'</p></br>';
+            }
+            // finaliza el bloque de transacción
+
+            
         }
         mysqli_close($conexionDB);
     }
@@ -107,6 +183,11 @@
 							}
 						?>
 					</select>
+				</div>
+                <div class="wd100">
+                	<label for="descuento">Descuento</label>
+					<input type="number" name="descuento" placeholder="Ingrese el descuento" value="0"/>
+					<br>
 				</div><br> 
                 <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar CLiente</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
