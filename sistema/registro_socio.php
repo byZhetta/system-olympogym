@@ -108,7 +108,7 @@
                     throw new Exception($conexionDB->error);
                 else {
                     $instruccSQL="INSERT INTO detalle_venta_servicios (Cod_Venta, Cod_Clase, Periodo, Fecha_Alta, Fecha_Vencim, Total)
-                                    VALUES (".$conexionDB->insert_id.", '$codClase', '$membresia', '$fecha_ingreso', '$fecha_vencimiento', '$costo')";
+                                    VALUES (".$conexionDB->insert_id.", '$codClase', '$membresia', '$fecha_ingreso', '$fecha_vencimiento', '$total')";
                     // Ejecutar la operación
                     $queryVentas_Item=$conexionDB->query($instruccSQL);
                     if (!$queryVentas_Item)
