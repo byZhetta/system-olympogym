@@ -22,10 +22,10 @@
 				</li>
 				<?php } ?>
 				<li class="principal">
-					<a href="#">Cliente <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
+					<a href="#">Clientes <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
 					<ul>
-						<li><a href="registro_socio.php">Nuevo Cliente</a></li>
-						<li><a href="lista_socio.php">Lista de Cliente</a></li>
+						<li><a href="registro_socio.php">Nuevo Clientes</a></li>
+						<li><a href="lista_socio.php">Lista de Clientes</a></li>
 					</ul>
 				</li>
 				<?php if($_SESSION['rol'] == 1){ ?>
