@@ -22,7 +22,7 @@
             if($estado == 'Abierto'){
         ?>
         <div class="title_page">
-            <h1>Nueva Venta de Servicio</h1>
+            <h1>Venta Libre</h1>
         </div>
 
 		<?php
@@ -205,25 +205,6 @@
 			}
 		?>
 
-        <div class="datos_cliente">
-            <div class="action_cliente">
-            	<a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear socio</a>
-            </div>
-			<br>
-			<div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
-			<?php
-				// Si se grabó con exito, se muestra el botón
-				if ($grabadoConExito === true){
-			?>
-				<div class="datos">
-					<a href="ventas.php" class="btn_new"><i class="far fa-file-alt"></i> Ver Factura</a>
-				</div>
-			<?php
-				}
-			?>
-        </div>
-
-
         <div class="datos_venta">
 			<h4>Datos de Venta</h4>
 			<form action="ventaServicios.php" method="post" class="datos">
@@ -231,7 +212,7 @@
 					<label>Vendedor</label>
 					<p><?php echo $_SESSION['nombre']; ?></p>
 				</div>
-				<div class="wd25">
+				<div class="wd40">
                 	<label for="socio">DNI del Cliente</label>
 					<select id="socio" name="dnideSocio">
 						<option value="" selected="selected">-selecciona-</option>
@@ -245,35 +226,9 @@
 					</select>
 					<br>
 				</div>
-				<div class="wd25">
-                	<label for="clase">Membresia</label>
-					<select id="clase" name="nombredeClase">
-						<option value="" selected="selected">-selecciona-</option>
-						<?php
-							if ($listaClases->num_rows > 0) {
-								while ($fila = $listaClases->fetch_assoc()) {
-									echo '<option value="'.$fila["NombreC"].'">'.$fila["NombreC"]."</option>";
-								}
-							}
-						?>
-					</select>
-				</div>
-				<div class="wd25">
-					<label for="periodo">Periodo</label>
-					<select id="periodo" name="periodo">
-						<option value="" selected="selected">-selecciona-</option>
-						<option value="1">Diario</option>
-						<option value="2">Semanal</option>
-						<option value="3">Mensual</option>
-						<option value="4">Trimentral</option>
-						<option value="5">Semestral</option>
-						<option value="6">Anual</option>
-					</select>
-				</div>
-				<div class="wd100">
-                	<label for="descuento">Descuento</label>
-					<input type="number" name="descuento" placeholder="Ingrese el descuento" value="0"/>
-					<br>
+				<div class="wd40">
+					<label for="monto">Monto</label>
+					<input type="number" name="monto" placeholder="Ingrese monto" value="" autofocus/>
 				</div>
 				<div class="wd30">
 					<button type="submit" class="link_addone" name="confirmar"><i class="far fa-check-circle"></i> Confirmar</button>
