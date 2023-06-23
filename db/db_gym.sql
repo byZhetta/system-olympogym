@@ -142,9 +142,6 @@ CREATE TABLE `articulos` (
 -- Volcado de datos para la tabla `articulos`
 --
 
-INSERT INTO `articulos` (`IdArticulo`, `Descripcion`, `Cantidad`, `Precio_Unitario`, `Marca`, `Cod_Proveedor`) VALUES
-(11, 'Cuartes', 9, 1.00, 'cuates', 5);
-
 -- --------------------------------------------------------
 
 --
@@ -166,17 +163,6 @@ CREATE TABLE `caja` (
 -- Volcado de datos para la tabla `caja`
 --
 
-INSERT INTO `caja` (`IdCaja`, `FechaApertura`, `Actividad`, `Monto_inicial`, `Monto_salida`, `Total_caja`, `Cod_Empleado`, `Estado`) VALUES
-(163, '2023-06-18 22:22:17', 'Venta de Servicio', 60.00, 0.00, 0.00, 1, 'Abierto'),
-(164, '2023-06-18 22:26:25', 'Venta de Servicio', 10.00, 0.00, 10.00, 1, 'Abierto'),
-(165, '2023-06-18 22:28:46', 'Venta de Servicio', 0.00, 0.00, 10.00, 1, 'Abierto'),
-(166, '2023-06-18 22:41:45', 'Venta de Servicio', 40.00, 0.00, 50.00, 1, 'Abierto'),
-(167, '2023-06-18 23:07:07', 'Venta de Servicio', 0.00, 0.00, 50.00, 1, 'Abierto'),
-(168, '2023-06-18 23:08:59', 'Venta de Servicio', 280.00, 0.00, 330.00, 1, 'Abierto'),
-(169, '2023-06-18 23:09:24', 'Venta de Servicio', 280.00, 0.00, 610.00, 1, 'Abierto'),
-(170, '2023-06-18 23:20:15', 'Venta de Servicio', 250.00, 0.00, 860.00, 1, 'Abierto'),
-(171, '2023-06-18 23:26:17', 'Venta de Servicio', 10.00, 0.00, 870.00, 1, 'Abierto'),
-(172, '2023-06-18 23:26:58', 'Venta de Servicio', 270.00, 0.00, 1140.00, 1, 'Abierto');
 
 -- --------------------------------------------------------
 
@@ -194,14 +180,6 @@ CREATE TABLE `clases` (
 --
 -- Volcado de datos para la tabla `clases`
 --
-
-INSERT INTO `clases` (`IdClase`, `NombreC`, `Duracion`, `Costo_Clase`) VALUES
-(13, 'Diario', '1 día', 5.00),
-(14, 'Semanal', '1 semana', 20.00),
-(15, 'Mensual', '1 mes', 60.00),
-(16, 'Triemestral', '3 meses', 150.00),
-(17, 'Semestral', '6 meses', 280.00),
-(18, 'Anual', '1 año', 380.00);
 
 -- --------------------------------------------------------
 
@@ -251,18 +229,6 @@ CREATE TABLE `detalle_venta_servicios` (
 -- Volcado de datos para la tabla `detalle_venta_servicios`
 --
 
-INSERT INTO `detalle_venta_servicios` (`IdDetalle_venta_serv`, `Cod_Venta`, `Cod_Clase`, `Periodo`, `Fecha_Alta`, `Fecha_Vencim`, `Total`) VALUES
-(30, 92, 15, '', '0000-00-00', '0000-00-00', 60.00),
-(31, 93, 14, '', '0000-00-00', '0000-00-00', 20.00),
-(32, 94, 16, '', '0000-00-00', '0000-00-00', 150.00),
-(33, 95, 15, 'Mensual', '2023-06-19', '2023-07-19', 60.00),
-(34, 96, 16, 'Triemestral', '2023-06-19', '0000-00-00', 150.00),
-(35, 97, 18, 'Anual', '2023-06-19', '2024-06-19', 380.00),
-(36, 98, 18, 'Anual', '2023-06-19', '2024-06-19', 380.00),
-(37, 99, 17, 'Semestral', '2023-06-19', '2023-12-19', 280.00),
-(38, 100, 14, 'Semanal', '2023-06-19', '2023-06-26', 20.00),
-(39, 101, 17, 'Semestral', '2023-06-19', '2023-12-19', 280.00);
-
 -- --------------------------------------------------------
 
 --
@@ -309,9 +275,6 @@ CREATE TABLE `instructores` (
 -- Volcado de datos para la tabla `instructores`
 --
 
-INSERT INTO `instructores` (`Id_Instructor`, `Nombre`, `Dni`, `Direccion`, `Telefono`, `Email`, `Sueldo`) VALUES
-(5, 'David', 12345678, 'sfsdf', 123454576, 'sdsdfsggfd@gmail.com', 900.00);
-
 -- --------------------------------------------------------
 
 --
@@ -330,9 +293,6 @@ CREATE TABLE `proveedores` (
 --
 -- Volcado de datos para la tabla `proveedores`
 --
-
-INSERT INTO `proveedores` (`IdProveedor`, `Nombre`, `Direccion`, `Codigo_Postal`, `Telefono`, `Email`) VALUES
-(5, 'Digo', 'Geranios', 6000, 948756123, 'pachacutec.technology@gmail.com');
 
 -- --------------------------------------------------------
 
