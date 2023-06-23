@@ -182,7 +182,7 @@
 					<input type="number" name="descuento" placeholder="Ingrese el descuento" value="0"/>
 					<br>
 				</div><br> 
-                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar CLiente</button>
+                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar Cliente</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
 
