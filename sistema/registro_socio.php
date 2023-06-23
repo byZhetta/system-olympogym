@@ -145,14 +145,13 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Socio</title>
+	<title>Olympo gym | Registro Cliente</title>
 </head>
 <body>
-    
     <?php include "includes/header.php"; ?>
 	<section id="container">
-
         <div class="form_register">
+        <hr>
             <h1>Registro de cliente</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>

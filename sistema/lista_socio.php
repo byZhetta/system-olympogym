@@ -13,7 +13,7 @@
     
     <?php include "includes/header.php"; ?>
 	<section id="container">
-
+    <hr>
 		<h1>CLIENTES</h1>
         <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear Cliente</a>
 
