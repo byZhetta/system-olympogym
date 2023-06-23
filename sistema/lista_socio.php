@@ -13,12 +13,12 @@
     
     <?php include "includes/header.php"; ?>
 	<section id="container">
-
-		<h1>SOCIOS</h1>
-        <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear Socio</a>
+    <hr>
+		<h1>CLIENTES</h1>
+        <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear Cliente</a>
 
         <form action="buscar_socio.php" mathod="get" class="form_search">
-            <input type="text" name="busqueda" id="busqueda" placeholder="Nombre / DNI / Email">
+            <input type="text" name="busqueda" id="busqueda" placeholder="Nombre / DNI">
             <button type="submit" class="btn_search"><i class="fas fa-search"></i></button>
         </form>
         <form action="imprimir_socio.php" method="get" class="form_search" target="_blank">
@@ -27,12 +27,9 @@
         </form>
         <table>
             <tr>
-                <th>Nro.</th>
-                <th>Nombre</th>
-                <th>Dni</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Email</th>
+                <th>DNI</th>
+                <th>Nombre y Apellidos</th>
+                <th>Telefono</th>
                 <th>Membresia</th>
                 <th>F. Inicio</th>
                 <th>F. Final</th>
@@ -66,12 +63,9 @@
 
                     ?>
                         <tr>
-                            <td><?php echo $data["Id_Socio"]; ?></td>
+                            <td><?php echo $data["Dni"]; ?></td>    
                             <td><?php echo $data["Nombre"]; ?></td>
-                            <td><?php echo $data["Dni"]; ?></td>
-                            <td><?php echo $data["Direccion"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
-                            <td><?php echo $data["Email"]; ?></td>
                             <td><?php echo $data["NombreC"]; ?></td>
                             <td><?php echo $data["fecha_ingreso"]; ?></td>
                             <td><?php echo $data["fecha_vencimiento"]; ?></td>

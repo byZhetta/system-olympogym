@@ -9,7 +9,8 @@
         } else {
             
             $sueldo = $_POST['sueldo'];
-            $usuario = $_SESSION['idUser'];  
+            $usuario = $_SESSION['idUser']; 
+             
 
             $query1 = mysqli_query($conexionDB,"SELECT SUM(Total_caja) AS TOTAL FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja WHERE Cod_Empleado = '$usuario')");
             $dato = mysqli_fetch_array($query1);

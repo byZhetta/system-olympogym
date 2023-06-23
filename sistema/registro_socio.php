@@ -8,16 +8,14 @@
 
     if(!empty($_POST)){
         $alert='';
-        if(empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['direccion']) ||
-           empty($_POST['telefono']) || empty($_POST['correo']) || empty($_POST['membresia']) ){
+        if(empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['telefono']) || 
+        empty($_POST['membresia']) ){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
             $nombre = $_POST['nombre'];
             $dni = $_POST['dni'];
-            $direccion = $_POST['direccion'];
             $telefono = $_POST['telefono'];
-            $email = $_POST['correo'];
             $membresia = $_POST['membresia'];
             $fecha_ingreso = date("Y-m-d");
             $descuento = $_POST['descuento'];
@@ -59,22 +57,16 @@
                     break;
             }
             
-            $query = mysqli_query($conexionDB,"SELECT * FROM socios WHERE Dni = '$dni' OR Email = '$email' ");
+            $query = mysqli_query($conexionDB,"SELECT * FROM socios WHERE Dni = '$dni' OR Telefono = '$telefono' ");
             $result = mysqli_fetch_array($query);
 
             if($result > 0){
-                $alert = '<p class="msg_error">El DNI o el correo ya existe.</p>';
-            } else {
-                $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Direccion,Telefono,Email,fecha_ingreso,fecha_vencimiento,Id_Clase)
-                                                        VALUES('$nombre','$dni','$direccion','$telefono','$email','$fecha_ingreso','$fecha_vencimiento','$codClase')");
+                $alert = '<p class="msg_error">El DNI o el telefono ya existe.</p>';
                 
-                if($query_insert){
-                    $alert = '<p class="msg_save">Socio guardado correctamente.</p>';
-                } else {
-                    $alert = '<p class="msg_error">Error al guardar el socio.</p>';
-                }
-            }
-
+            } else {
+                $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Telefono,fecha_ingreso,fecha_vencimiento,Id_Clase)
+                                                        VALUES('$nombre','$dni','$telefono','$fecha_ingreso','$fecha_vencimiento','$codClase')");
+                
             // Consultar id de socio
             $consultaCodSocio="SELECT Id_Socio FROM socios
                              WHERE Dni = '$dni'";
@@ -95,6 +87,11 @@
             // Consutar id de caja
             $consultaCodCaja="SELECT MAX(IdCaja) as IdCaja FROM caja WHERE Actividad = 'Venta de Servicio'";
             $codCaja=( ( $conexionDB->query($consultaCodCaja) )->fetch_object() )->IdCaja;
+                if($query_insert){
+                    $alert = '<p class="msg_save">Socio guardado correctamente.</p>';
+                } else {
+                    $alert = '<p class="msg_error">Error al guardar el socio.</p>';
+                }
 
             // INICIA EL BLOQUE DE TRANSACCIÓN
             try {					    
@@ -135,11 +132,11 @@
                 $conexionDB->rollback();
                 $alert='<p class="msg_error">Ocurrió un error al intentar grabar la Venta!!'. $ex->getMessage() .'</p></br>';
             }
-            // finaliza el bloque de transacción
-
-            
+            // finaliza el bloque de transacción   
         }
         mysqli_close($conexionDB);
+        
+            }
     }
 
 ?>
@@ -148,29 +145,24 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Socio</title>
+	<title>Olympo gym | Registro Cliente</title>
 </head>
 <body>
-    
     <?php include "includes/header.php"; ?>
 	<section id="container">
-
         <div class="form_register">
+        <hr>
             <h1>Registro de cliente</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
             <form action="" method="post">
-                <label for="nombre">Nombre</label>
+                <label for="nombre">Nombre y Apellidos</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo">
-                <label for="dni">Dni</label>
+                  <label for="dni">Dni</label>
                 <input type="number" name="dni" id="dni" placeholder="Ingrese el DNI">
-                <label for="direccion">Dirección</label>
-                <input type="text" name="direccion" id="direccion" placeholder="Ingrese una Dirección">
                 <label for="telefono">Teléfono</label>
                 <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
-                <label for="correo">Email</label>
-                <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico">
                 <div class="">
                 	<label for="membresia">Membresia</label>
 					<select id="membresia" name="membresia">
@@ -189,7 +181,7 @@
 					<input type="number" name="descuento" placeholder="Ingrese el descuento" value="0"/>
 					<br>
 				</div><br> 
-                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar CLiente</button>
+                <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar Cliente</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
 
