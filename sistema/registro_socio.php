@@ -62,17 +62,11 @@
 
             if($result > 0){
                 $alert = '<p class="msg_error">El DNI o el telefono ya existe.</p>';
+                
             } else {
                 $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Telefono,fecha_ingreso,fecha_vencimiento,Id_Clase)
                                                         VALUES('$nombre','$dni','$telefono','$fecha_ingreso','$fecha_vencimiento','$codClase')");
                 
-                if($query_insert){
-                    $alert = '<p class="msg_save">Socio guardado correctamente.</p>';
-                } else {
-                    $alert = '<p class="msg_error">Error al guardar el socio.</p>';
-                }
-            }
-
             // Consultar id de socio
             $consultaCodSocio="SELECT Id_Socio FROM socios
                              WHERE Dni = '$dni'";
@@ -93,6 +87,11 @@
             // Consutar id de caja
             $consultaCodCaja="SELECT MAX(IdCaja) as IdCaja FROM caja WHERE Actividad = 'Venta de Servicio'";
             $codCaja=( ( $conexionDB->query($consultaCodCaja) )->fetch_object() )->IdCaja;
+                if($query_insert){
+                    $alert = '<p class="msg_save">Socio guardado correctamente.</p>';
+                } else {
+                    $alert = '<p class="msg_error">Error al guardar el socio.</p>';
+                }
 
             // INICIA EL BLOQUE DE TRANSACCIÓN
             try {					    
@@ -133,11 +132,11 @@
                 $conexionDB->rollback();
                 $alert='<p class="msg_error">Ocurrió un error al intentar grabar la Venta!!'. $ex->getMessage() .'</p></br>';
             }
-            // finaliza el bloque de transacción
-
-            
+            // finaliza el bloque de transacción   
         }
         mysqli_close($conexionDB);
+        
+            }
     }
 
 ?>
@@ -161,7 +160,7 @@
             <form action="" method="post">
                 <label for="nombre">Nombre y Apellidos</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo">
-                <label for="dni">Dni</label>
+                  <label for="dni">Dni</label>
                 <input type="number" name="dni" id="dni" placeholder="Ingrese el DNI">
                 <label for="telefono">Teléfono</label>
                 <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
