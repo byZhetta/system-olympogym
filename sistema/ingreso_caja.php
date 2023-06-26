@@ -12,7 +12,7 @@
             $sueldo = $_POST['sueldo'];
             $usuario = $_SESSION['idUser'];
 
-            $consulta = mysqli_query($conexionDB,"SELECT * FROM caja");
+            $consulta = mysqli_query($conexionDB,"SELECT * FROM caja WHERE Cod_Empleado = $usuario");
             $resulconsulta = mysqli_num_rows($consulta);
             
             if($resulconsulta > 0){
