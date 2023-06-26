@@ -97,7 +97,7 @@
 			        <input type="password" name="Clave" placeholder="Contraseña" />
 			    </div>
 				<h5>Administrador</h5>
-				<p>Usuario: [admin] - Contraseña: [admin]</p>
+				<p>Usuario: [admin1] - Contraseña: [password]</p>
 				<h5>Vendedor</h5>
 				<p>Usuario: [user1] - Contraseña: [user]</p>
 				<div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div><br>

@@ -94,8 +94,10 @@
                 <input type="text" name="telefono" id="telefono" placeholder="Ingrese un Teléfono" value="<?php echo $telefono; ?>">
                 <label for="correo">Email</label>
                 <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico" value="<?php echo $correo; ?>">
+                <?php if($iduser = 1){ ?>
                 <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" id="usuario" placeholder="Ingrese un Usuario" value="<?php echo $usuario; ?>">
+                <input type="text" name="usuario" id="usuario" placeholder="Ingrese un Usuario" value="<?php echo $usuario; ?>">                    
+                <?php } ?>
             <?php if($iduser != 1){ ?>
                 <label for="rol">Tipo Usuario</label>
 
