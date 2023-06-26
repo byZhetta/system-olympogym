@@ -11,13 +11,30 @@ El sistema contiene dos tipos de roles de acceso:
 
 Los cuales son asignados al momento de registrar un nuevo usuario, los mismos presentan módulos diferentes, en los cuales se enfocan en la función que tendrán en el sistema. Para acceder, el usuario debe estar registrado previamente por el administrador, el cual le asignará un usuario y contraseña.
 
+Las secciones generales que están disponibles son:
+
+- ✔️ Registro de caja y movimiento de dinero.
+- ✔️ Venta de artículos.
+- ✔️ Venta de membresias de clases deportivas.
+- ✔️ Registro de usuarios y asignación de roles.
+- ✔️ Registro de clases deportivas (dias y duración).
+- ✔️ Registro de datos de socios o clientes.
+- ✔️ Registro de instructores o profesores de las clases.
+- ✔️ Registro de proveedores de artículos.
+- ✔️ Registro de artículos para venta.
+
+## Capturas
+
 ![Captura de Login](img/login.jpg)
 > Pantalla de Login
 
 La pantalla principal del sistema depende del tipo de rol del usuario, ya que las opciones varian de acuerdo a la función que tendrá el mismo.  
 
 ![Captura del Dashboard principal](img/index.jpg)
-> Pantalla principal
+> Pantalla principal de Administrador
+
+![Captura del Dashboard vendedor](img/index1.jpg)
+> Pantalla principal de Vendedor
 
 ## Recursos
 
