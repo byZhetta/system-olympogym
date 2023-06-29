@@ -87,7 +87,7 @@
         <form class="formulario" method="post" action="">
 			<h3>INICIAR SESIÓN</h3>    
 			<div class="contenedor">
-			    <img src="img/olympo_gym.png" alt="Login">
+			    <img src="img/logo_platinium.png" alt="Login">
 				<div class="input-contenedor">
 				    <i class="fas fa-user icon"></i>
 				    <input type="text" name="Usuario" placeholder="Usuario" />
