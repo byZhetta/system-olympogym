@@ -32,7 +32,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Clase</title>
+	<title>Titanium Fit| Registro Clase</title>
 </head>
 <body>
     

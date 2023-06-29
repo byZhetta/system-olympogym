@@ -9,7 +9,7 @@
     <header>
 		<div class="header">
 			<a href="#" class="btnMenu"><i class="fas fa-bars"></i></a>
-		    <img class="logo" src="../img/logo.png" alt="Olympo gym" width="100px" heigth="100px">
+		    <img class="logo" src="../img/logo_platinium1.png" alt="Platinium Fit" width="300px" heigth="180px">
 			<div class="optionsBar">
 				<!---
 			    <p><?php echo fechaC(); ?></p>

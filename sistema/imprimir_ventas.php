@@ -117,7 +117,7 @@
                         echo            $fila["empl"].'-'.$fila["nempl"];
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
-                        echo            'S/. '.$fila["Total"];
+                        echo            ''.$fila["Total"];
                         echo        "<td>";
                         echo    "<tr>";                                                                    
                     }

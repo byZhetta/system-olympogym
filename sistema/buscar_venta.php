@@ -52,7 +52,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+	<title>Titanium Fit| Sistema</title>
 </head>
 <body>
     

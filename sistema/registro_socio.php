@@ -145,11 +145,22 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Cliente</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Titanium Fit| Registro Cliente</title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>
 	<section id="container">
+        <?php
+            include "../conexion.php";
+			$usuario = $_SESSION['idUser']; 
+            $query = mysqli_query($conexionDB,"SELECT Estado, IdCaja FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja WHERE Cod_Empleado = '$usuario')");
+			$conexionDB->close();
+            $resultado = mysqli_fetch_array($query);
+			$estado = $resultado['Estado'];
+            if($estado == 'Abierto'){
+        ?>
         <div class="form_register">
         <hr>
             <h1>Registro de cliente</h1>
@@ -186,7 +197,19 @@
             </form>
 
         </div>
-
+        <?php
+	        } else {
+        ?>
+                <div class="data_delete">
+                    <i class="fas fa-cash-register fa-7x" style="color: #e66262"></i>
+                    <br>
+                    <h1 style="color: #ff1a1a; font-size: 25px;">DEBE ABRIR CAJA PARA INICIAR LA VENTA</h1>
+                        <br><br>
+                        <a href="lista_caja.php"><button type="submit" class="btn_save"><i class="fas fa-cash-register"></i> Actividad de Caja</button></a>
+                </div>
+        <?php
+            }
+        ?>                    
 	</section>
 	<?php include "includes/footer.php"; ?>
 </body>
