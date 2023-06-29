@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <?php include "includes/scripts.php"; ?>
-    <title>Olympo gym | Venta de Servicios</title>
+    <title>Titanium Fit| Venta de Servicios</title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>

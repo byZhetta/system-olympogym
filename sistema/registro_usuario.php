@@ -44,7 +44,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Usuario</title>
+	<title>Titanium Fit| Registro Usuario</title>
 </head>
 <body>
     
