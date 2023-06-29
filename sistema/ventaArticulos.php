@@ -15,11 +15,13 @@
     <?php include "includes/header.php"; ?>
     <section id="container">
         <?php
-            $usuario = $_SESSION['idUser']; 
-            $query = mysqli_query($conexionDB,"SELECT Estado, IdCaja FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja WHERE Cod_Empleado = '$usuario')");
-            $resultado = mysqli_fetch_array($query);
-            $estado = $resultado['Estado'];
-            if($estado == 'Abierto'){
+           include "../conexion.php";
+           $usuario = $_SESSION['idUser']; 
+           $query = mysqli_query($conexionDB,"SELECT Estado, IdCaja FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja WHERE Cod_Empleado = '$usuario')");
+           $conexionDB->close();
+           $resultado = mysqli_fetch_array($query);
+           $estado = $resultado['Estado'];
+           if($estado == 'Abierto'){
         ?>
         <div class="title_page">
             <h1>Nueva Venta de Artículo</h1>
