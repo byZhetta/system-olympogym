@@ -331,14 +331,6 @@ CREATE TABLE `socios` (
   `Id_Clase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `socios`
---
-
-INSERT INTO `socios` (`Id_Socio`, `Nombre`, `Dni`, `Direccion`, `Telefono`, `Email`, `fecha_ingreso`, `fecha_vencimiento`, `Id_Clase`) VALUES
-(25, 'Roani Campos', 76805393, 'Los Geranios 345', 947629917, 'jcamposg15@unc.edu.pe', '2023-06-18', '2023-07-18', 15),
-(26, 'David Lopez', 56784512, 'fgjghjghj', 23423534, 'dgdfg@gmail.com', '2023-06-19', '2023-06-26', 14),
-
 -- --------------------------------------------------------
 
 --
@@ -356,9 +348,6 @@ CREATE TABLE `ventas` (
 --
 -- Volcado de datos para la tabla `ventas`
 --
-
-INSERT INTO `ventas` (`IdVenta`, `Fecha`, `Cod_Caja`, `Cod_Socio`, `Total`) VALUES
-
 
 --
 -- Índices para tablas volcadas
