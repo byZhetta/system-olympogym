@@ -72,9 +72,13 @@
                             <td>    
                                 <?php 
                                     if(date('Y-m-d') > $data["fecha_vencimiento"]){
-                                        echo "Vencido"; 
+                                ?>      
+                                <a class="inactivo" href="reactivar_membresia.php?id=<?php echo $data["Id_Socio"]; ?>">Vencido</a>
+                                <?php
                                     }else{
-                                        echo "Activo"; 
+                                ?>
+                                    <p class="activo">Activo</p>
+                                <?php    
                                     }
                                 ?>
                             </td>
