@@ -98,22 +98,44 @@
             $estado = $resultado['Estado'];
             if($estado == 'Abierto'){
         ?>
-        <div class ="form_register">
-            <h1>Venta Libre</h1>
-            <hr>
+
+        <div class="form_register">
+			<h1>Venta Libre</h1>
+            <br>
             <div class="Alert"><?php echo isset($alert) ? $alert : ''; ?></div>
-            <form action="" method="post">
-                <label for="">vendedor</label>
-                <p><?php echo $_SESSION['nombre']; ?></p>
-                <label for="socio">Nombre del Cliente</label>
-                <input type="text" value="<?php echo $clienteGeneral ?>" readonly name="nombreCliente">
-                <label for="descuento">Monto</label>
-				<input type="number" name="monto" placeholder="Ingrese el monto" value="" autofocus/><br>
-                <button type="submit" class="btn_save_1"><i class="far fa-check-circle"></i> Confirmar</button>
-                <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
-            </form>
+			<form action=""method="post" class="datos" >
+				<div class="wd100">
+					<label>Vendedor</label>
+					<p><?php echo $_SESSION['nombre']; ?></p>
+				</div>
+				<div class="wd40">
+                	<label for="socio">Nombre del socio</label>
+					<input type="text" value="<?php echo $clienteGeneral ?>" readonly name="nombreCliente">
+				</div>
+				<div class="wd40">
+                    <label for="descuento">Monto</label>
+				    <input type="number" name="monto" placeholder="Ingrese el monto" value="" autofocus/><br>
+				</div>
+				<div class="wd30">
+					<button type="submit" class="link_addone" name="confirmar"><i class="far fa-check-circle"></i> Confirmar</button>
+				</div>
+				<div class="wd30">                 
+					<button type="submit" class="link_deleteone" name="cancelar"><i class="fas fa-ban"></i> Cancelar</button>
+				</div>
+			</form>
         </div>
-        <?php } ?>
+        <?php } else {
+        ?>
+                <div class="data_delete">
+                    <i class="fas fa-cash-register fa-7x" style="color: #e66262"></i>
+                    <br>
+                    <h1 style="color: #ff1a1a; font-size: 25px;">DEBE ABRIR CAJA PARA INICIAR LA VENTA</h1>
+                        <br><br>
+                        <a href="lista_caja.php"><button type="submit" class="btn_save"><i class="fas fa-cash-register"></i> Actividad de Caja</button></a>
+                </div>
+        <?php
+            }
+        ?>      
         
     </section>
     <?php include "includes/footer.php"; ?>
