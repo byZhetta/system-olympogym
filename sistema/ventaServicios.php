@@ -29,8 +29,6 @@
 			// Inserta el archivo de conexión
 			require('../conexion.php');
 			// Para rellenar la lista desplegable del formulario
-			$listaClases = "SELECT NombreC FROM clases";
-			$listaClases = $conexionDB->query($listaClases);
 			$listaClientes = "SELECT Nombre, Dni From socios";
 			$listaClientes = $conexionDB->query($listaClientes);
 			$grabadoConExito=false;
@@ -62,32 +60,14 @@
 						$inputError = true;
 					}
 				}
-				// Recibe el nombre de la clase
-				if ($inputError != true && empty($_POST['nombredeClase'])) {
-					$alert='<p class="msg_error">
-					ERROR: Por favor seleccione el nombre de una clase
-					</p></br>'; 
-					$inputError = true;
-				} else {
-					$nomClase = $conexionDB->escape_string($_POST['nombredeClase']);
-				}
-				// Recibe el periodo elegido
-				if ($inputError != true && empty($_POST['periodo'])){
-					$alert='<p class="msg_error">
-					ERROR: Por favor seleccione un periodo
-					</p></br>'; 
-					$inputError = true;
-				} else {
-					$periodo = $conexionDB->escape_string($_POST['periodo']);
-				}
-				// Recibe el descuento dado
+				// Recibe el monto dado
 				if ($inputError != true && empty($_POST['periodo'])){
 					$alert='<p class="msg_error">
 					ERROR: Por favor ingrese un valor válido
 					</p></br>'; 
 					$inputError = true;
 				} else {
-					$descuento = $conexionDB->escape_string($_POST['descuento']);
+					$monto = $conexionDB->escape_string($_POST['monto']);
 				}
 
 				// añade valores a la base de datos utilizando la consulta INSERT
@@ -103,56 +83,25 @@
 
 					// Consultar id de clase
 					$consultaCodClase="SELECT IdClase FROM clases
-										WHERE NombreC = '$nomClase'";
+										WHERE NombreC = 'Diario'";
 					$codClase=( ( $conexionDB->query($consultaCodClase) )->fetch_object() )->IdClase;
 
 					// Consultar costo de clase
 					$consultaCosto="SELECT Costo_Clase FROM clases
-									WHERE NombreC = '$nomClase'";
+									WHERE NombreC = 'Diario'";
 					$costo=( ( $conexionDB->query($consultaCosto) )->fetch_object() )->Costo_Clase;
-
-					// PROCESAR PERIODO
-					// a) Calcular el total
-					// b) Reconvertir el periodo numérico a texto
-					// c) Calcular la fecha de vencimiento
-					switch ($periodo){
-						case 1: $total= $costo*1 - $descuento;
-								$periodo= 'Diario';
-								$fechaVenc=date ("Y/m/j", strtotime('1 day'));
-							break;
-						case 2: $total= $costo*1 - $descuento;
-								$periodo= 'Semanal';
-								$fechaVenc=date ("Y/m/j", strtotime('1 week'));
-							break;
-						case 3: $total= $costo*1 - $descuento;
-								$periodo= 'Mensual';
-								$fechaVenc=date ("Y/m/j", strtotime('1 month'));
-							break;
-						case 4: $total= $costo*1 - $descuento;
-								$periodo= 'trimestral';
-								$fechaVenc=date ("Y/m/j", strtotime('3 month'));
-							break;
-						case 5: $total= $costo*1 - $descuento;
-								$periodo= 'Semestral';
-								$fechaVenc=date ("Y/m/j", strtotime('6 month'));
-							break;
-						case 6: $total= $costo*1 - $descuento;
-								$periodo= 'Anual';
-								$fechaVenc=date ("Y/m/j", strtotime('12 month'));
-							break;
-					}
 
 					//id usuario
 					$usuario = $_SESSION['idUser'];
 
 					//sumar total en caja
-					$saldcaja = mysqli_query($conexionDB,"SELECT SUM(Total_caja) + '$total' as total FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja)");
+					$saldcaja = mysqli_query($conexionDB,"SELECT SUM(Total_caja) + '$monto' as total FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja)");
 					$data = mysqli_fetch_array($saldcaja);
                     $totalcaja = $data['total'];
 
 					//inserta datos de venta en caja
 					$insercaja=mysqli_query($conexionDB,"INSERT INTO caja (Actividad,Monto_inicial,Total_caja,Cod_Empleado,Estado) 
-					                                                VALUES ('Venta de Servicio', '$total', '$totalcaja', '$usuario', 'Abierto')");
+					                                                VALUES ('Venta de Libre', '$monto', '$totalcaja', '$usuario', 'Abierto')");
 
 					// Consutar id de caja
 					$consultaCodCaja="SELECT MAX(IdCaja) as IdCaja FROM caja WHERE Actividad = 'Venta de Servicio'";
@@ -164,14 +113,14 @@
 						$conexionDB->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
 
 						$instruccSQL="INSERT INTO ventas (Cod_Caja, Cod_Socio, Total) 
-										VALUES ('$codCaja', '$codSocio', '$total')";
+										VALUES ('$codCaja', '$codSocio', '$monto')";
 						// Ejecutar la operación
 						$queryVentas=$conexionDB->query($instruccSQL);
 						if (!$queryVentas)
 							throw new Exception($conexionDB->error);
 						else {
 							$instruccSQL="INSERT INTO detalle_venta_servicios (Cod_Venta, Cod_Clase, Periodo, Fecha_Alta, Fecha_Vencim, Total)
-											VALUES (".$conexionDB->insert_id.", '$codClase', '$periodo', '$fecha', '$fechaVenc', '$costo')";
+											VALUES (".$conexionDB->insert_id.", '11', 'Venta libre', '$fecha', '$fecha', '$monto')";
 							// Ejecutar la operación
 							$queryVentas_Item=$conexionDB->query($instruccSQL);
 							if (!$queryVentas_Item)
@@ -182,7 +131,7 @@
 								$alert='<p class="msg_aviso_ok">
 								Venta de servicio realizada !!
 								</br>
-								El total a abonar es de S/.'.$total.'</p></br>';
+								El total a abonar es de S/.'.$monto.'</p></br>';
 
 								// Esta variable permite mostrar el botón "Imprimir"
 								$grabadoConExito=true;
@@ -228,7 +177,7 @@
 				</div>
 				<div class="wd40">
 					<label for="monto">Monto</label>
-					<input type="number" name="monto" placeholder="Ingrese monto" value="" autofocus/>
+					<input type="number" name="monto" placeholder="Ingrese monto" value="10" autofocus/>
 				</div>
 				<div class="wd30">
 					<button type="submit" class="link_addone" name="confirmar"><i class="far fa-check-circle"></i> Confirmar</button>
