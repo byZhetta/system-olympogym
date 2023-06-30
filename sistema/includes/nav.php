@@ -55,7 +55,6 @@
 					<a href="#">Ventas <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
 					<ul>
 						<li><a href="ventaArticulos.php">Venta Artículo</a></li>
-						<li><a href="ventaServicios.php">Venta Servicio</a></li>
 						<li><a href="ventaLibre.php">Venta Libre</a></li>
 						<li><a href="ventas.php">Historial de Ventas</a></li>
 					</ul>

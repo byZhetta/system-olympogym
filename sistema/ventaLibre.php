@@ -39,13 +39,13 @@
 
                 //Consultar codigo de clase
                 $nombreClase = "Diario";
-                $codigoClaseSQL = "SELECT IdClase FROM clase WHERE NombreC = '$nombreClase'";
-                $codClase = (($conexionDB.query($codigoClaseSQL))->fetch_object())->IdClase;
+                $codigoClaseSQL = "SELECT IdClase FROM clases WHERE NombreC = '$nombreClase'";
+                $codClase = (($conexionDB->query($codigoClaseSQL))->fetch_object())->IdClase;
                 
                 //Consultar id Cliente/socio
 
                 $codigoSocioSQL = "SELECT Id_Socio FROM socios WHERE Nombre = '$nombreGeneral'"; 
-                $codigoSocio = (($conexionDB.query($codigoSocioSQL))->fetch_object())->Id_Socio;
+                $codigoSocio = (($conexionDB->query($codigoSocioSQL))->fetch_object())->Id_Socio;
 
                 $ventaSql = "INSERT INTO ventas (Cod_Caja, Cod_Socio, total)
                             VALUES ('$codCaja', '$codigoSocio', '$costo')";
@@ -66,7 +66,7 @@
                         $alert = '<p class="msg_aviso_ok">
                         ¡Venta realizada con éxito!
                         </br>
-                        El total a abonar es de S/.'.$costo.'</p>>/br>';
+                        El total a abonar es de S/.'.$costo.'</p></br>';
                     }
                 }
         
@@ -99,7 +99,7 @@
             if($estado == 'Abierto'){
         ?>
         <div class ="form_register">
-            <h4>Datos de venta</h4>
+            <h1>Venta Libre</h1>
             <hr>
             <div class="Alert"><?php echo isset($alert) ? $alert : ''; ?></div>
             <form action="" method="post">
@@ -108,7 +108,7 @@
                 <label for="socio">Nombre del Cliente</label>
                 <input type="text" value="<?php echo $clienteGeneral ?>" readonly name="nombreCliente">
                 <label for="descuento">Monto</label>
-				<input type="number" name="monto" placeholder="Ingrese el monto" value="10"/><br>
+				<input type="number" name="monto" placeholder="Ingrese el monto" value="" autofocus/><br>
                 <button type="submit" class="btn_save_1"><i class="far fa-check-circle"></i> Confirmar</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
