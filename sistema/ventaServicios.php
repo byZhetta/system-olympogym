@@ -155,7 +155,7 @@
 		?>
 
         <div class="datos_venta">
-			<h4>Datos de Venta</h4>
+			<h4>Venta Libre</h4>
 			<form action="ventaServicios.php" method="post" class="datos">
 				<div class="wd100">
 					<label>Vendedor</label>
