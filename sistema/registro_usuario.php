@@ -44,7 +44,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Usuario</title>
+	<title>Titanium Fit| Registro Usuario</title>
 </head>
 <body>
     
@@ -52,6 +52,7 @@
 	<section id="container">
 
         <div class="form_register">
+        <hr>
             <h1>Registro de usuario</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>

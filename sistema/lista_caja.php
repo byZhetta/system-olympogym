@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+	<title>Titanium Fit| Sistema</title>
 </head>
 <body>
     
@@ -26,7 +26,7 @@
         <?php } ?>
         
         <form action="" mathod="" class="form_search"  style="background: #fff";>
-            <h2>SALDO TOTAL $ </h2>
+            <h2>SALDO TOTAL S/. </h2>
             <?php 
             $totalc = mysqli_query($conexionDB,"SELECT SUM(Total_caja) as TOTALc FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja WHERE Cod_Empleado = '$usuario')");
             $data = mysqli_fetch_array($totalc);
@@ -41,9 +41,9 @@
                 <th>Código</th>
                 <th>Fecha / Hora: Movimientos</th>
                 <th>Actividad</th>
-                <th>Entrada ($)</th>
-                <th>Salida ($)</th>
-                <th>Saldo Total Act.($)</th>
+                <th>Entrada (S/.)</th>
+                <th>Salida (S/.)</th>
+                <th>Saldo Total Act.(S/.)</th>
                 <th>ID-Usuario</th>
             </tr>
             <?php
@@ -78,9 +78,9 @@
                                         $nfecha =  date("d-m-Y H:i:s", strtotime($fechac));
                                         echo $nfecha; ?></td>
                             <td><?php echo $data["Actividad"]; ?></td>
-                            <td>$ <?php echo $data["Monto_inicial"]; ?></td>
-                            <td>$ <?php echo $data["Monto_salida"]; ?></td>
-                            <td>$ <?php echo $data["Total_caja"]; ?></td>
+                            <td>S/. <?php echo $data["Monto_inicial"]; ?></td>
+                            <td>S/. <?php echo $data["Monto_salida"]; ?></td>
+                            <td>S/. <?php echo $data["Total_caja"]; ?></td>
                             <td><?php echo $data["Cod_Empleado"]; ?>-<?php echo $data["Nombre"]; ?></td>
                         </tr>
             <?php

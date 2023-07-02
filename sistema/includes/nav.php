@@ -2,8 +2,17 @@
         <nav>
 			<ul>
 				<li><a href="index.php">Inicio</a></li>
-				<li><a href="clases.php">Clases</a></li>
+				<?php if($_SESSION['rol'] == 1){ ?>		
+				<li class="principal">
+					<a href="#">Membresias <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
+					<ul>
+						<li><a href="registro_clase.php">Nuevo Membresia</a></li>
+						<li><a href="clases.php">Lista de Membresias</a></li>
+					</ul>
+				</li>
+					<?php } ?>
 				<?php if($_SESSION['rol'] == 1){ ?>	
+					
 				<li class="principal">
 					<a href="#">Usuarios <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
 					<ul>
@@ -13,10 +22,10 @@
 				</li>
 				<?php } ?>
 				<li class="principal">
-					<a href="#">Socios <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
+					<a href="#">Clientes <span class="arrow"><i class="fas fa-angle-down"></i></span></a>
 					<ul>
-						<li><a href="registro_socio.php">Nuevo Socio</a></li>
-						<li><a href="lista_socio.php">Lista de Socios</a></li>
+						<li><a href="registro_socio.php">Nuevo Clientes</a></li>
+						<li><a href="lista_socio.php">Lista de Clientes</a></li>
 					</ul>
 				</li>
 				<?php if($_SESSION['rol'] == 1){ ?>

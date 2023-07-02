@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+	<title>Titanium Fit| Sistema</title>
 </head>
 <body>
     
@@ -23,11 +23,11 @@
 
         ?>
 
-		<h1>Lista de socios</h1>
-        <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear Socio</a>
+		<h1>Lista de clientes</h1>
+        <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear cliente</a>
 
         <form action="buscar_socio.php" mathod="get" class="form_search">
-            <input type="text" name="busqueda" id="busqueda" placeholder="Nombre / DNI / Email" value="<?php echo $busqueda; ?>">
+            <input type="text" name="busqueda" id="busqueda" placeholder="Nombre / DNI" value="<?php echo $busqueda; ?>">
             <button type="submit" class="btn_search"><i class="fas fa-search"></i></button>
         </form>
 
@@ -36,17 +36,14 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Dni</th>
-                <th>Dirección</th>
                 <th>Teléfono</th>
-                <th>Email</th>
                 <th>Acciones</th>
             </tr>
             <?php
                 //paginador
                 $sql_registe = mysqli_query($conexionDB,"SELECT COUNT(*) AS total_registro FROM socios
                                                             WHERE (Nombre LIKE '%$busqueda%' OR
-                                                                    Dni LIKE '%$busqueda%' OR
-                                                                    Email LIKE '%$busqueda%'
+                                                                    Dni LIKE '%$busqueda%'
                                                                     ) ");
                 $result_register = mysqli_fetch_array($sql_registe);
                 $total_registro = $result_register['total_registro'];
@@ -64,8 +61,7 @@
                 
                 $query = mysqli_query($conexionDB,"SELECT * FROM socios
                                                     WHERE (Nombre LIKE '%$busqueda%' OR
-                                                            Dni LIKE '%$busqueda%' OR
-                                                            Email LIKE '%$busqueda%'
+                                                            Dni LIKE '%$busqueda%' 
                                                             ) 
                                                     ORDER BY Id_Socio ASC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
@@ -78,9 +74,7 @@
                             <td><?php echo $data["Id_Socio"]; ?></td>
                             <td><?php echo $data["Nombre"]; ?></td>
                             <td><?php echo $data["Dni"]; ?></td>
-                            <td><?php echo $data["Direccion"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
-                            <td><?php echo $data["Email"]; ?></td>
                             <td>
                                 <a class="link_edit" href="editar_socio.php?id=<?php echo $data["Id_Socio"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 |

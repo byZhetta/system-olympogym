@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <?php include "includes/scripts.php"; ?>
-    <title>Olympo gym | Venta de Servicios</title>
+    <title>Titanium Fit| Venta de Servicios</title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>
@@ -22,7 +22,7 @@
             if($estado == 'Abierto'){
         ?>
         <div class="title_page">
-            <h1>Nueva Venta de Servicio</h1>
+            <h1>Venta Libre</h1>
         </div>
 
 		<?php
@@ -31,6 +31,8 @@
 			// Para rellenar la lista desplegable del formulario
 			$listaClases = "SELECT NombreC FROM clases";
 			$listaClases = $conexionDB->query($listaClases);
+			$listaClientes = "SELECT Nombre, Dni From socios";
+			$listaClientes = $conexionDB->query($listaClientes);
 			$grabadoConExito=false;
 
 			// Si el formulario fue enviado, procesa los datos
@@ -78,6 +80,15 @@
 				} else {
 					$periodo = $conexionDB->escape_string($_POST['periodo']);
 				}
+				// Recibe el descuento dado
+				if ($inputError != true && empty($_POST['periodo'])){
+					$alert='<p class="msg_error">
+					ERROR: Por favor ingrese un valor válido
+					</p></br>'; 
+					$inputError = true;
+				} else {
+					$descuento = $conexionDB->escape_string($_POST['descuento']);
+				}
 
 				// añade valores a la base de datos utilizando la consulta INSERT
 				if ($inputError != true) {
@@ -105,17 +116,29 @@
 					// b) Reconvertir el periodo numérico a texto
 					// c) Calcular la fecha de vencimiento
 					switch ($periodo){
-						case 1: $total= $costo*1;
+						case 1: $total= $costo*1 - $descuento;
 								$periodo= 'Diario';
 								$fechaVenc=date ("Y/m/j", strtotime('1 day'));
 							break;
-						case 2: $total= $costo*3;
+						case 2: $total= $costo*1 - $descuento;
 								$periodo= 'Semanal';
 								$fechaVenc=date ("Y/m/j", strtotime('1 week'));
 							break;
-						case 3: $total= $costo*12;
+						case 3: $total= $costo*1 - $descuento;
 								$periodo= 'Mensual';
 								$fechaVenc=date ("Y/m/j", strtotime('1 month'));
+							break;
+						case 4: $total= $costo*1 - $descuento;
+								$periodo= 'trimestral';
+								$fechaVenc=date ("Y/m/j", strtotime('3 month'));
+							break;
+						case 5: $total= $costo*1 - $descuento;
+								$periodo= 'Semestral';
+								$fechaVenc=date ("Y/m/j", strtotime('6 month'));
+							break;
+						case 6: $total= $costo*1 - $descuento;
+								$periodo= 'Anual';
+								$fechaVenc=date ("Y/m/j", strtotime('12 month'));
 							break;
 					}
 
@@ -159,7 +182,7 @@
 								$alert='<p class="msg_aviso_ok">
 								Venta de servicio realizada !!
 								</br>
-								El total a abonar es de $'.$total.'</p></br>';
+								El total a abonar es de S/.'.$total.'</p></br>';
 
 								// Esta variable permite mostrar el botón "Imprimir"
 								$grabadoConExito=true;
@@ -182,59 +205,30 @@
 			}
 		?>
 
-        <div class="datos_cliente">
-            <div class="action_cliente">
-            	<a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear socio</a>
-            </div>
-			<br>
-			<div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
-			<?php
-				// Si se grabó con exito, se muestra el botón
-				if ($grabadoConExito === true){
-			?>
-				<div class="datos">
-					<a href="ventas.php" class="btn_new"><i class="far fa-file-alt"></i> Ver Factura</a>
-				</div>
-			<?php
-				}
-			?>
-        </div>
-
-
         <div class="datos_venta">
 			<h4>Datos de Venta</h4>
 			<form action="ventaServicios.php" method="post" class="datos">
-				<div class="wd40">
+				<div class="wd100">
 					<label>Vendedor</label>
 					<p><?php echo $_SESSION['nombre']; ?></p>
 				</div>
 				<div class="wd40">
-                	<label for="socio">DNI del Socio</label>
-					<input type="number" name="dnideSocio" placeholder="Ingrese el DNI"/>
-					<br>
-				</div>
-				<div class="wd40">
-                	<label for="clase">Clase</label>
-					<select id="clase" name="nombredeClase">
+                	<label for="socio">DNI del Cliente</label>
+					<select id="socio" name="dnideSocio">
 						<option value="" selected="selected">-selecciona-</option>
 						<?php
-							if ($listaClases->num_rows > 0) {
-								while ($fila = $listaClases->fetch_assoc()) {
-									echo '<option value="'.$fila["NombreC"].'">'.$fila["NombreC"]."</option>";
+							if ($listaClientes->num_rows > 0) {
+								while ($fila = $listaClientes->fetch_assoc()) {
+									echo '<option value="'.$fila["Dni"].'">'.$fila["Dni"]." - ".$fila["Nombre"]."</option>";
 								}
 							}
 						?>
 					</select>
+					<br>
 				</div>
 				<div class="wd40">
-					<label for="periodo">Periodo</label>
-					<select id="periodo" name="periodo">
-						<option value="" selected="selected">-selecciona-</option>
-						<option value="1">Diario</option>
-						<option value="2">Semanal</option>
-						<option value="3">Mensual</option>
-					</select>
-					<br><br>
+					<label for="monto">Monto</label>
+					<input type="number" name="monto" placeholder="Ingrese monto" value="" autofocus/>
 				</div>
 				<div class="wd30">
 					<button type="submit" class="link_addone" name="confirmar"><i class="far fa-check-circle"></i> Confirmar</button>

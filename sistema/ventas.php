@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+	<title>Titanium Fit| Sistema</title>
 </head>
 <body>
     
@@ -41,11 +41,10 @@
                 <th>Nro.</th>
                 <th>Código caja</th>
                 <th>Fecha / Hora: Venta</th>
-                <th>Dni cliente</th>
-                <th>Nombre cliente</th>
                 <th>ID-Vendedor</th>
                 <th>Total</th>
                 <th>Factura</th>
+                <th>Acciones</th>                
             </tr>
             <?php
                 //paginador
@@ -65,8 +64,8 @@
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
                 $query = mysqli_query($conexionDB,"SELECT v.IdVenta, v.Fecha, v.Cod_Caja, v.Cod_Socio, v.Total, 
-                                                    s.Nombre as cliente, s.Dni as dnis, c.Cod_Empleado as empl, e.Nombre as nempl
-                                                    FROM ventas v INNER JOIN socios s ON v.Cod_Socio = s.Id_Socio 
+                                                    c.Cod_Empleado as empl, e.Nombre as nempl
+                                                    FROM ventas v 
                                                     INNER JOIN caja c ON v.Cod_Caja = c.IdCaja
                                                     INNER JOIN empleados e ON c.Cod_Empleado = e.IdEmpleado
                                                     ORDER BY IdVenta DESC LIMIT $desde,$por_pagina");
@@ -80,16 +79,17 @@
                             <td><?php echo $data["IdVenta"]; ?></td>
                             <td><?php echo $data["Cod_Caja"]; ?></td>
                             <td><?php echo date("d-m-Y H:i:s", strtotime($data["Fecha"])); ?></td>
-                            <td><?php echo $data["dnis"]; ?></td>
-                            <td><?php echo $data["cliente"]; ?></td>
                             <td><?php echo $data["empl"]; ?>-<?php echo $data["nempl"]; ?></td>
-                            <td><span>$ </span><?php echo $data["Total"]; ?></td>
+                            <td><span>S/.</span><?php echo $data["Total"]; ?></td>
                             <td>
                                 <div class="div_acciones">
                                     <div>
                                         <button class="btn_view view_factura" type="button" cl="<?php echo $data["Cod_Socio"]; ?>" f="<?php echo $data["IdVenta"]; ?>"><i class="fas fa-print"></i></button>
                                     </div>
                                 </div>
+                            </td>
+                            <td>
+                                <a class="link_delete" href="eliminar_venta.php?id=<?php echo $data["IdVenta"]; ?>"><i class="far fa-trash-alt"></i> Eliminar</a>   
                             </td>
                         </tr>
             <?php
