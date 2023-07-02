@@ -7,6 +7,7 @@
             header("location: ventas.php");
             mysqli_close($conexionDB);
         }
+        
         $IdDetalle_venta_serv = $_POST['IdDetalle_venta_serv'];
         $query_delete = mysqli_query($conexionDB,"DELETE FROM detalle_venta_servicios where IdDetalle_venta_serv = $IdDetalle_venta_serv");
         
@@ -23,8 +24,10 @@
         }else{
             echo "Error al eliminar";
         }
-
     }
+ 
+
+ 
 
     if(empty($_REQUEST['id'])){
         header("location: ventas.php");

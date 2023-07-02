@@ -38,7 +38,6 @@
     
     <?php include "includes/header.php"; ?>
 	<section id="container">
-
         <div class="form_register">
             <h1>Crear tipo de membresía</h1>
             <hr>
