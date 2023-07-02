@@ -10,7 +10,6 @@
 	<title>Titanium Fit| Sistema</title>
 </head>
 <body>
-    
     <?php include "includes/header.php"; ?>
 	<section id="container">
 

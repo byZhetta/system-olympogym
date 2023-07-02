@@ -27,7 +27,7 @@
 			}
 			
 			// Formato de facturación
-			$this->Image('../img/olympo_gym.png',15,15,45);
+			$this->Image('../img/logo_platinium.png',15,15,45);
 			$this->Ln(10);
 			$this->Cell(103);
 			$this->SetFont('Arial','B',13);

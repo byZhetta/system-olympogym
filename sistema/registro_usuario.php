@@ -61,11 +61,11 @@
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo">
                 <label for="dni">Dni</label>
-                <input type="text" name="dni" id="dni" placeholder="Ingrese el DNI">
+                <input type="number" name="dni" id="dni" placeholder="Ingrese el DNI">
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Ingrese una Dirección">
                 <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
+                <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
                 <label for="correo">Email</label>
                 <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico">
                 <label for="usuario">Usuario</label>

@@ -71,7 +71,7 @@
                 <label for="cantidad">Cantidad</label>
                 <input type="number" name="cantidad" id="cantidad" placeholder="Ingrese una cantidad">
                 <label for="precio">Precio</label>
-                <input type="number" name="precio" id="precio" placeholder="Ingrese el precio unitario"><br>
+                <input value="" type="number" step="any" name="precio" id="precio" placeholder="Ingrese el precio unitario"><br>
                 <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar Artículo</button>
                 <a href="lista_articulos.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>
