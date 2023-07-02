@@ -41,3 +41,7 @@ La pantalla principal del sistema depende del tipo de rol del usuario, ya que la
 Se utilizó la biblioteca fpdf para los reportes en formato excel y pdf.
 
 * http://www.fpdf.org/
+
+## Autor
+
+[@byZhetta](https://github.com/byZhetta) - [MIT license](https://opensource.org/licenses/MIT).
