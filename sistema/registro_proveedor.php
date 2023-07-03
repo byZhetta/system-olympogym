@@ -5,19 +5,18 @@
 
     if(!empty($_POST)){
         $alert='';
-        if(empty($_POST['nombre']) || empty($_POST['direccion']) || empty($_POST['cp']) ||
-           empty($_POST['telefono']) || empty($_POST['correo']) ){
+        if(empty($_POST['nombre']) || empty($_POST['direccion']) || empty($_POST['telefono']) || 
+        empty($_POST['correo']) ){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
             $nombre    = $_POST['nombre'];
             $direccion = $_POST['direccion'];
-            $cp        = $_POST['cp'];
             $telefono  = $_POST['telefono'];
             $email     = $_POST['correo'];
 
-            $query_insert = mysqli_query($conexionDB,"INSERT INTO proveedores(Nombre,Direccion,Codigo_Postal,Telefono,Email)
-                                                        VALUES('$nombre','$direccion','$cp','$telefono','$email')");
+            $query_insert = mysqli_query($conexionDB,"INSERT INTO proveedores(Nombre,Direccion,Telefono,Email)
+                                                        VALUES('$nombre','$direccion','$telefono','$email')");
 
             if($query_insert){
                 $alert = '<p class="msg_save">Proveedor guardado correctamente.</p>';
@@ -52,8 +51,6 @@
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese el Nombre">
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Ingrese una Dirección">
-                <label for="cp">Código Postal</label>
-                <input type="number" name="cp" id="cp" placeholder="Ingrese el Código postal">
                 <label for="telefono">Teléfono</label>
                 <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
                 <label for="correo">Email</label>
