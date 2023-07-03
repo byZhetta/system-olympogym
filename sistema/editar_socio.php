@@ -4,17 +4,21 @@
     
     if(!empty($_POST)){
         $alert='';
-        if(empty($_POST['nombre']) || empty($_POST['telefono']) ){
+        if(empty($_POST['nombre']) || empty($_POST['telefono'] ) || empty($_POST['fecha_ingreso'] ) || 
+        empty($_POST['fecha_vencimiento'] ) ){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
             $idSocio   = $_POST['id'];
             $nombre    = $_POST['nombre'];
             $telefono  = $_POST['telefono'];
+            $fecha_ingreso = $_POST['fecha_ingreso'];
+            $fecha_vencimiento = $_POST['fecha_vencimiento'];
 
 
             $sql_update = mysqli_query($conexionDB,"UPDATE socios
-                                                        SET Nombre='$nombre', Telefono='$telefono'
+                                                        SET Nombre='$nombre', Telefono='$telefono', 
+                                                        fecha_ingreso='$fecha_ingreso', fecha_vencimiento='$fecha_vencimiento'
                                                         WHERE Id_Socio=$idSocio ");
 
             if($sql_update){
@@ -46,6 +50,8 @@
             $nombre = $data['Nombre'];
             $dni = $data['Dni'];
             $telefono = $data['Telefono'];
+            $fecha_ingreso = $data['fecha_ingreso'];
+            $fecha_vencimiento = $data['fecha_vencimiento'];
 
         }
     }
@@ -75,6 +81,10 @@
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo" value="<?php echo $nombre; ?>">
                 <label for="telefono">Teléfono</label>
                 <input type="text" name="telefono" id="telefono" placeholder="Ingrese un Teléfono" value="<?php echo $telefono; ?>">
+                <label for="fecha_ingreso">Fecha de ingreso</label>
+                <input type="date" name="fecha_ingreso" id="fecha_ingreso" placeholder="Ingrese fecha de ingreso" value="<?php echo $fecha_ingreso; ?>">
+                <label for="fecha_vencimiento">Fecha de vencimiento</label>
+                <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" placeholder="Ingrese fecha de vencimiento" value="<?php echo $fecha_vencimiento; ?>">
                 <br>
                 <button type="submit" class="btn_save_1"><i class="far fa-edit"></i> Actualizar socio</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>

@@ -17,7 +17,7 @@
             $dni = $_POST['dni'];
             $telefono = $_POST['telefono'];
             $membresia = $_POST['membresia'];
-            $fecha_ingreso = date("Y-m-d");
+            $fecha_ingreso = $_POST['fech_ingreso'];
             $descuento = $_POST['descuento'];
 
             // Consultar id de clase
@@ -175,6 +175,8 @@
                 <input type="number" name="dni" id="dni" placeholder="Ingrese el DNI">
                 <label for="telefono">Teléfono</label>
                 <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
+                <label for="fech_ingreso">Fecha de ingreso</label>
+                <input type="date" name="fech_ingreso" id="fech_ingreso" placeholder="Ingrese una fecha">
                 <div class="">
                 	<label for="membresia">Membresia</label>
 					<select id="membresia" name="membresia">
