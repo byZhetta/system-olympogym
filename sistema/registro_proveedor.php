@@ -34,7 +34,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Titanium Fit| Registro Proveedor</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?> | Registro Proveedor</title>
 </head>
 <body>
     

@@ -33,7 +33,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Titanium Fit| Registro Artículo</title>
+	<title><?php echo $nombreGym ?> | Registro Artículo</title>
 </head>
 <body>
     

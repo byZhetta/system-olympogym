@@ -7,9 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <?php include "includes/scripts.php"; ?>
+    <?php include "includes/texto.php"; ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titanium Fit| Venta de Artículos</title>
+    <title><?php echo $nombreGym ?> | Venta de Artículos</title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>
