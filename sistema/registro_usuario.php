@@ -44,6 +44,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
+    <?php include "includes/texto.php"; ?>
 	<title><?php echo $nombreGym ?> | Registro Usuario</title>
 </head>
 <body>
