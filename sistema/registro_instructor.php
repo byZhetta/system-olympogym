@@ -42,7 +42,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Titanium Fit| Registro Instructor</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?> | Registro Instructor</title>
 </head>
 <body>
     

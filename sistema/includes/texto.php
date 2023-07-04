@@ -1,3 +1,3 @@
 <?php 
-    $nombreGym = "Platinium Fit | Sistema";
+    $nombreGym = "Platinium Fit Soft";
 ?>

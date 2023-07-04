@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Titanium Fit| Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     
@@ -30,7 +31,6 @@
                 <th>Nro.</th>
                 <th>Nombre</th>
                 <th>Dirección</th>
-                <th>Código Postal</th>
                 <th>Teléfono</th>
                 <th>Email</th>
                 <th>Acciones</th>
@@ -64,7 +64,6 @@
                             <td><?php echo $data["IdProveedor"]; ?></td>
                             <td><?php echo $data["Nombre"]; ?></td>
                             <td><?php echo $data["Direccion"]; ?></td>
-                            <td><?php echo $data["Codigo_Postal"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
                             <td><?php echo $data["Email"]; ?></td>
                             <td>

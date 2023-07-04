@@ -138,7 +138,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "includes/scripts.php"; ?>
-    <title>Titanium Fit | Sistema</title>
+    <title><?php echo $nombreGym ?> | Sistema</title>
 </head>
 <body>
     <?php include "includes/header.php" ?>
