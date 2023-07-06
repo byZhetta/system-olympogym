@@ -57,6 +57,7 @@
 						<li><a href="ventaArticulos.php">Venta Artículo</a></li>
 						<li><a href="ventaLibre.php">Venta Libre</a></li>
 						<li><a href="ventas.php">Historial de Ventas</a></li>
+						<li><a href="reportes.php">Reportes</a></li>
 					</ul>
 				</li>
 			</ul>
