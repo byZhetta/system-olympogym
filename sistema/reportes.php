@@ -1,6 +1,10 @@
 <?php
     include "../conexion.php";
     session_start();
+
+    $fecha_de = '';
+	$fecha_a = '';
+	$where = "Fecha BETWEEN '$fecha_de' AND '$fecha_a'";
 ?>
   
 
@@ -21,14 +25,15 @@
         
         <div>
             <h5>Buscar por Fecha</h5>
-			<form action="imprimir_ventas_por_mes.php" method="POST" class="form_search_date">
+			<form action="" method="post" class="form_search_date">
 				<label>De: </label>
-                <input type="date" name="fecha_de" id="fecha_de" value="<?php echo $fecha_de; ?>" required>
+                <input type="date" name="fecha_de" id="fecha_de" value="<?php $fecha_de; ?>" required>
                 <label> a </label>
-                <input type="date" name="fecha_a" id="fecha_a" value="<?php echo $fecha_a; ?>" required>	      
+                <input type="date" name="fecha_a" id="fecha_a" value="<?php $fecha_a; ?>" required>	 
+				<br> 
         	</form>	
 			</form>	
-			<form action="imprimir_ventas_por_mes.php" method="get" class="form_search"  target="_blank">
+			<form action="" method="get" class="form_search"  target="_blank">
             		<input type="submit" name="nPdf" id="idPdf" value="Exportar PDF">
             		<input type="submit" name="nExcel" id="idExcel" value="Exportar Excel">       
         	</form>	

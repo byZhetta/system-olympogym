@@ -5,8 +5,10 @@
     include "../conexion.php";
     session_start();
 
-    $fecha_de = $_POST['fecha_de'];
-    $fecha_a = $_POST['fecha_a'];
+    $fecha_de = 'fecha_de' ;
+    $fecha_a = 'fecha_a';
+    //$where = "Fecha BETWEEN fecha_de AND fecha_a";
+    $where = "Fecha BETWEEN '$fecha_de' AND '$fecha_a'";
 
 
     // si el formulario ha sido enviado procesa los datos del formulario                        
@@ -37,7 +39,7 @@
         s.Nombre as cliente, s.Dni as dnis, c.Cod_Empleado as empl, e.Nombre as nempl
         FROM ventas v INNER JOIN socios s ON v.Cod_Socio = s.Id_Socio 
         INNER JOIN caja c ON v.Cod_Caja = c.IdCaja
-        INNER JOIN empleados e ON c.Cod_Empleado = e.IdEmpleado WHERE v.Fecha BETWEEN fecha_de AND fecha_a
+        INNER JOIN empleados e ON c.Cod_Empleado = e.IdEmpleado WHERE $where
         ORDER BY IdVenta DESC");
         //$result = mysqli_num_rows($sql);
         $queryArticulos = $conexionDB->query($sql);
