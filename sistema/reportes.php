@@ -29,7 +29,6 @@
                 <input type="date" name="fecha_de" id="fecha_de" value="<?php $fecha_de; ?>" required>
                 <label> a </label>
                 <input type="date" name="fecha_a" id="fecha_a" value="<?php $fecha_a; ?>" required>	 
-
 				<input type="submit" name="nPdf1" id="idPdf" value="Exportar PDF">
 				<input type="submit" name="nExcel1" id="idExcel" value="Exportar Excel"> 	
         	</form>	
