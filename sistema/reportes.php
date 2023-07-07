@@ -4,7 +4,7 @@
 
     $fecha_de = '';
 	$fecha_a = '';
-	$where = "Fecha BETWEEN '$fecha_de' AND '$fecha_a'";
+
 ?>
   
 
@@ -21,21 +21,17 @@
     <?php include "includes/header.php"; ?>
 	<section id="container">
 
-		<h1>REPORTES</h1>
-        
+		<h1>REPORTES</h1>   
         <div>
-            <h5>Buscar por Fecha</h5>
-			<form action="" method="post" class="form_search_date">
+            <h2>Buscar por Fecha</h2>
+			<form action="imprimir_ventas_por_fecha.php" method="get" class="form_search_date" target="_blank">
 				<label>De: </label>
                 <input type="date" name="fecha_de" id="fecha_de" value="<?php $fecha_de; ?>" required>
                 <label> a </label>
                 <input type="date" name="fecha_a" id="fecha_a" value="<?php $fecha_a; ?>" required>	 
-				<br> 
-        	</form>	
-			</form>	
-			<form action="" method="get" class="form_search"  target="_blank">
-            		<input type="submit" name="nPdf" id="idPdf" value="Exportar PDF">
-            		<input type="submit" name="nExcel" id="idExcel" value="Exportar Excel">       
+
+				<input type="submit" name="nPdf1" id="idPdf" value="Exportar PDF">
+				<input type="submit" name="nExcel1" id="idExcel" value="Exportar Excel"> 	
         	</form>	
         </div>
 	</section>
