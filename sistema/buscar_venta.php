@@ -8,7 +8,7 @@
     $fecha_a = '';
 
     if( isset($_REQUEST['busqueda']) && $_REQUEST['busqueda'] ==''){
-        header("location: ventas.php");
+       header("location: ventas.php");
     }
 
     if( isset($_REQUEST['fecha_de']) || isset($_REQUEST['fecha_a'])){
@@ -77,6 +77,7 @@
                 <input type="date" name="fecha_a" id="fecha_a" value="<?php echo $fecha_a; ?>" required>
                 <button type="submit" class="btn_view"><i class="fas fa-search"></i></button>
             </form>
+           
         </div>
         <table>
             <tr>
@@ -125,7 +126,7 @@
                             <td><?php echo $data["dnis"]; ?></td>
                             <td><?php echo $data["cliente"]; ?></td>
                             <td><?php echo $data["empl"]; ?>-<?php echo $data["nempl"]; ?></td>
-                            <td><span>$ </span><?php echo $data["Total"]; ?></td>
+                            <td><span>S/. </span><?php echo $data["Total"]; ?></td>
                             <td>
                                 <div class="div_acciones">
                                     <div>
