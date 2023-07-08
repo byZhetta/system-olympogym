@@ -106,7 +106,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `procesar_venta` (IN `cod_usuario` I
                       SET total = (SELECT SUM(cantidad * precio_venta) FROM detalle_temp);
                       
                       SET totalcaj = (SELECT SUM(Total_caja) + total as totalc FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja));
-                      
+
                       INSERT INTO caja (Actividad,Monto_inicial,Total_caja,Cod_Empleado,Estado) VALUES ('Venta de Artículo', total, totalcaj, cod_usuario,'Abierto');
 	              SET incaja= LAST_INSERT_ID();                                         
                

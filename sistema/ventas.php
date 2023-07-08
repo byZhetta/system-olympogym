@@ -44,6 +44,7 @@
                 <th>Fecha / Hora: Venta</th>
                 <th>ID-Vendedor</th>
                 <th>Total</th>
+                <th>Actividad</th>
                 <th>Factura</th>
                 <th>Acciones</th>                
             </tr>
@@ -65,7 +66,7 @@
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
                 $query = mysqli_query($conexionDB,"SELECT v.IdVenta, v.Fecha, v.Cod_Caja, v.Cod_Socio, v.Total, 
-                                                    c.Cod_Empleado as empl, e.Nombre as nempl
+                                                    c.Cod_Empleado as empl, e.Nombre as nempl, c.Actividad
                                                     FROM ventas v 
                                                     INNER JOIN caja c ON v.Cod_Caja = c.IdCaja
                                                     INNER JOIN empleados e ON c.Cod_Empleado = e.IdEmpleado
@@ -82,6 +83,7 @@
                             <td><?php echo date("d-m-Y H:i:s", strtotime($data["Fecha"])); ?></td>
                             <td><?php echo $data["empl"]; ?>-<?php echo $data["nempl"]; ?></td>
                             <td><span>S/.</span><?php echo $data["Total"]; ?></td>
+                            <td><?php echo $data["Actividad"]; ?></td>
                             <td>
                                 <div class="div_acciones">
                                     <div>
@@ -90,7 +92,14 @@
                                 </div>
                             </td>
                             <td>
+                                <?php
+                                if($data['Actividad'] == "Venta de Artículo"){
+                                    ?>
+                                <a class="link_delete"><i class="far fa-trash-alt"></i> Eliminar</a>
+                                <?php } else{
+                                ?>
                                 <a class="link_delete" href="eliminar_venta.php?id=<?php echo $data["IdVenta"]; ?>"><i class="far fa-trash-alt"></i> Eliminar</a>   
+                                <?php } ?>
                             </td>
                         </tr>
             <?php

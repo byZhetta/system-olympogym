@@ -38,6 +38,7 @@
         $query = mysqli_query($conexionDB, "SELECT * FROM ventas v
                         INNER JOIN socios s ON v.Cod_socio = s.Id_Socio
                         INNER JOIN detalle_venta_servicios dvs ON v.IdVenta = dvs.Cod_Venta
+                        INNER JOIN caja c ON v.Cod_Caja = c.IdCaja
                         WHERE IdVenta = $IdVenta");
         mysqli_close($conexionDB);
         $result = mysqli_num_rows($query);
@@ -49,6 +50,7 @@
                 $fecha = $data['Fecha'];
                 $total = $data['Total'];
                 $IdDetalle_venta_serv = $data['IdDetalle_venta_serv'];
+                $actividad = $data['Actividad'];
             }
         }
     }
@@ -73,6 +75,7 @@
             <p>Dni: <span><?php echo $dni; ?></span></p>
             <p>Fecha: <span><?php echo $fecha; ?></span></p>
             <p>Total: <span><?php echo $total; ?></span></p>
+            <p>Actividad: <span><?php echo $actividad?></span></p>
 
             <form method="post" action="">
                 <input type="hidden" name="IdVenta" value="<?php echo $IdVenta; ?>">
