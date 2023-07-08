@@ -5,7 +5,7 @@
     {
         function Header()
         {
-        $this->Image('../img/olympo_gym.png',5,5,30);
+        $this->Image('../img/logo_platinium.png',5,5,30);
         $this->SetFont('Arial','B',16);
         $this->Cell(30);
         $this->Cell(120,10,'LISTADO GENERAL',0,0,'C');

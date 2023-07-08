@@ -42,7 +42,7 @@
                     $pdf->Cell(65, 6, mb_convert_encoding($fila["Descripcion"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
                     $pdf->Cell(35, 6, $fila["Marca"], 1, 0, 'C', 1);
                     $pdf->Cell(25, 6, $fila["Cantidad"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, '$ '.$fila["Precio_Unitario"], 1, 1, 'C', 1);
+                    $pdf->Cell(35, 6, 'S/. '.$fila["Precio_Unitario"], 1, 1, 'C', 1);
                 }
                 $pdf->Output('', 'articulos_completo.pdf');
                 // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"

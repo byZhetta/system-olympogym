@@ -7,18 +7,19 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     
     <?php include "includes/header.php"; ?>
 	<section id="container">
-
-		<h1>SOCIOS</h1>
-        <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear Socio</a>
+    <hr>
+		<h1>CLIENTES</h1>
+        <a href="registro_socio.php" class="btn_new"><i class="fas fa-user-plus"></i> Crear Cliente</a>
 
         <form action="buscar_socio.php" mathod="get" class="form_search">
-            <input type="text" name="busqueda" id="busqueda" placeholder="Nombre / DNI / Email">
+            <input type="text" name="busqueda" id="busqueda" placeholder="Nombre / DNI">
             <button type="submit" class="btn_search"><i class="fas fa-search"></i></button>
         </form>
         <form action="imprimir_socio.php" method="get" class="form_search" target="_blank">
@@ -27,12 +28,13 @@
         </form>
         <table>
             <tr>
-                <th>Nro.</th>
-                <th>Nombre</th>
-                <th>Dni</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Email</th>
+                <th>DNI</th>
+                <th>Nombre y Apellidos</th>
+                <th>Telefono</th>
+                <th>Membresia</th>
+                <th>F. Inicio</th>
+                <th>F. Final</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
             <?php
@@ -52,8 +54,9 @@
                 $desde = ($pagina-1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
-                $query = mysqli_query($conexionDB,"SELECT * FROM socios
-                                                    ORDER BY Id_Socio DESC LIMIT $desde,$por_pagina");
+                $query = mysqli_query($conexionDB,"SELECT * FROM socios s   
+                                                    INNER JOIN clases c ON s.Id_Clase = c.IdClase
+                                                    ORDER BY s.Id_Socio DESC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
                 if($result > 0){
@@ -61,12 +64,25 @@
 
                     ?>
                         <tr>
-                            <td><?php echo $data["Id_Socio"]; ?></td>
+                            <td><?php echo $data["Dni"]; ?></td>    
                             <td><?php echo $data["Nombre"]; ?></td>
-                            <td><?php echo $data["Dni"]; ?></td>
-                            <td><?php echo $data["Direccion"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
-                            <td><?php echo $data["Email"]; ?></td>
+                            <td><?php echo $data["NombreC"]; ?></td>
+                            <td><?php echo $data["fecha_ingreso"]; ?></td>
+                            <td><?php echo $data["fecha_vencimiento"]; ?></td>
+                            <td>    
+                                <?php 
+                                    if(date('Y-m-d') > $data["fecha_vencimiento"]){
+                                ?>      
+                                <a class="inactivo" href="reactivar_membresia.php?id=<?php echo $data["Id_Socio"]; ?>">Vencido</a>
+                                <?php
+                                    }else{
+                                ?>
+                                    <p class="activo">Activo</p>
+                                <?php    
+                                    }
+                                ?>
+                            </td>
                             <td>
                                 <a class="link_edit" href="editar_socio.php?id=<?php echo $data["Id_Socio"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 |

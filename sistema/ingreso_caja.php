@@ -48,20 +48,21 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     <?php include "includes/header.php"; ?>
 	<section id="container">
 
         <div class="form_register">
-            <h1>Ingreso de dinero ($)</h1>
+            <h1>Ingreso de dinero (S/.)</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
             <form action="" method="post">
                 <label for="sueldo">Importe: </label>
-                <input type="number" min="0.00" name="sueldo" id="sueldo" placeholder="Ingrese el importe ($)"> 
+                <input type="number" min="0.00" name="sueldo" id="sueldo" placeholder="Ingrese el importe (S/.)"> 
                 <br>
                 <button type="submit" class="link_edit"><i class="fas fa-cash-register"></i> Abrir Caja</button>
                 <a href="lista_caja.php" class="link_delete" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
