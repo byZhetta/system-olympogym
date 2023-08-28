@@ -31,15 +31,15 @@
             $costo=( ( $conexionDB->query($consultaCosto) )->fetch_object() )->Costo_Clase;
 
             switch ($membresia){
-                case 'Diario':
+                case 'Basico':
                         $total = $costo - $descuento; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 day'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
                     break;
-                case 'Semanal':
+                case 'Premiun':
                         $total = $costo - $descuento; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 week'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
                     break;
-                case 'Mensual':
+                case 'Vip':
                         $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
                     break;
@@ -55,8 +55,7 @@
                         $total = $costo - $descuento; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('12 month'));
                     break;
-            }
-            
+            }           
             $query = mysqli_query($conexionDB,"SELECT * FROM socios WHERE Dni = '$dni' OR Telefono = '$telefono' ");
             $result = mysqli_fetch_array($query);
 
