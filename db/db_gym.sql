@@ -180,6 +180,13 @@ CREATE TABLE `clases` (
 --
 -- Volcado de datos para la tabla `clases`
 --
+INSERT INTO `clases` (`IdClase`, `NombreC`, `Duracion`, `Costo_Clase`) VALUES
+(1, 'Basico', '1 mes', 50),
+(2, 'Premiun', '1 mes', 60),
+(3, 'Vip', '1 mes', 70),
+(4, 'Trimestral', '3 meses', 150),
+(5, 'Semestral', '6 meses', 270),
+(6, 'Anual', '12 meses', 480);
 
 -- --------------------------------------------------------
 
@@ -332,6 +339,9 @@ CREATE TABLE `socios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
+INSERT INTO `socios` (`Id_Socio`, `Nombre`, `Dni`, `Direccion`, `Telefono`, `Email`, `fecha_ingreso`, `fecha_vencimiento`, `Id_Clase`) VALUES
+(1, 'Cliente General', 12345678, 'null', 987654321,'null', '2023-06-18', '2023-07-18', 1);
+
 
 --
 -- Estructura de tabla para la tabla `ventas`
