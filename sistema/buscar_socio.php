@@ -34,10 +34,14 @@
 
         <table>
             <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Dni</th>
-                <th>Teléfono</th>
+                <th>Foto</th>
+                <th>DNI</th>
+                <th>Nombre y Apellidos</th>
+                <th>Telefono</th>
+                <th>Membresia</th>
+                <th>F. Inicio</th>
+                <th>F. Final</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
             <?php
@@ -60,11 +64,12 @@
                 $desde = ($pagina-1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
-                $query = mysqli_query($conexionDB,"SELECT * FROM socios
+                $query = mysqli_query($conexionDB,"SELECT * FROM socios s
+                                                    INNER JOIN Clases c on s.Id_Clase = c.IdClase
                                                     WHERE (Nombre LIKE '%$busqueda%' OR
                                                             Dni LIKE '%$busqueda%' 
                                                             ) 
-                                                    ORDER BY Id_Socio ASC LIMIT $desde,$por_pagina");
+                                                    ORDER BY s.Id_Socio DESC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
                 if($result > 0){
@@ -72,16 +77,31 @@
 
                     ?>
                         <tr>
-                            <td><?php echo $data["Id_Socio"]; ?></td>
+                            <td><img height="50px" src="data:image/jpg;base64, <?php echo base64_encode($data["Imagen"])?>" alt=""></td>
+                            <td><?php echo $data["Dni"]; ?></td>    
                             <td><?php echo $data["Nombre"]; ?></td>
-                            <td><?php echo $data["Dni"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
+                            <td><?php echo $data["NombreC"]; ?></td>
+                            <td><?php echo $data["fecha_ingreso"]; ?></td>
+                            <td><?php echo $data["fecha_vencimiento"]; ?></td>
+                            <td>    
+                                <?php 
+                                    if(date('Y-m-d') > $data["fecha_vencimiento"]){
+                                ?>      
+                                <a class="inactivo" href="reactivar_membresia.php?id=<?php echo $data["Id_Socio"]; ?>">Vencido</a>
+                                <?php
+                                    }else{
+                                ?>
+                                    <p class="activo">Activo</p>
+                                <?php    
+                                    }
+                                ?>
+                            </td>
                             <td>
                                 <a class="link_edit" href="editar_socio.php?id=<?php echo $data["Id_Socio"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 |
                                 <a class="link_delete" href="eliminar_socio.php?id=<?php echo $data["Id_Socio"]; ?>"><i class="far fa-trash-alt"></i> Eliminar</a>
-                                
-                            </td> 
+                            </td>
                         </tr>
             <?php
                     }

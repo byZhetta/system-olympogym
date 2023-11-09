@@ -12,7 +12,7 @@
         }else{
             $idSocio = $_POST['id'];
             $memb_nueva = $_POST['memb_nueva'];
-            $descuento = $_POST['descuento'];
+            $monto = $_POST['monto'];
             $fecha_ingreso = date("Y-m-d");
 
             //consultar id de clase
@@ -26,27 +26,27 @@
 
             switch ($memb_nueva){
                 case 'Diario':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 day'));
                     break;
                 case 'Semanal':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 week'));
                     break;
                 case 'Mensual':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
                     break;
                 case 'Trimestral':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('3 month'));
                     break;
                 case 'Semestral':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('6 month'));
                     break;
                 case 'Anual':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('12 month'));
                     break;
             }
@@ -178,8 +178,8 @@
 						?>
 					</select>
 				</div>
-                <label for="descuento">Descuento</label>
-                <input type="number" name="descuento" id="descuento" value="0" >
+                <label for="monto">Monto a pagar</label>
+                <input type="number" name="monto" id="monto" value="0">
                 <br>
                 <button type="submit" class="btn_save_1"><i class="far fa-edit"></i> Reactivar membresía</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>

@@ -9,7 +9,7 @@
     if(!empty($_POST)){
         $alert='';
         if(empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['telefono']) || 
-        empty($_POST['membresia']) ){
+        empty($_POST['membresia'])){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
@@ -18,7 +18,8 @@
             $telefono = $_POST['telefono'];
             $membresia = $_POST['membresia'];
             $fecha_ingreso = $_POST['fech_ingreso'];
-            $descuento = $_POST['descuento'];
+            $monto = $_POST['monto'];
+            $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 
             // Consultar id de clase
 			$consultaCodClase="SELECT IdClase FROM clases
@@ -31,28 +32,28 @@
             $costo=( ( $conexionDB->query($consultaCosto) )->fetch_object() )->Costo_Clase;
 
             switch ($membresia){
-                case 'Basico':
-                        $total = $costo - $descuento; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
+                case 'Diario':
+                        $total = $monto; 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 day'));
                     break;
-                case 'Premiun':
-                        $total = $costo - $descuento; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
+                case 'Semanal':
+                        $total = $monto; 
+                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 week'));
                     break;
-                case 'Vip':
-                        $total = $costo - $descuento; 
+                case 'Mensual':
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
                     break;
                 case 'Trimestral':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('3 month'));
                     break;
                 case 'Semestral':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('6 month'));
                     break;
                 case 'Anual':
-                        $total = $costo - $descuento; 
+                        $total = $monto; 
                         $fecha_vencimiento=date ("Y/m/j", strtotime('12 month'));
                     break;
             }           
@@ -63,8 +64,8 @@
                 $alert = '<p class="msg_error">El DNI o el telefono ya existe.</p>';
                 
             } else {
-                $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Telefono,fecha_ingreso,fecha_vencimiento,Id_Clase)
-                                                        VALUES('$nombre','$dni','$telefono','$fecha_ingreso','$fecha_vencimiento','$codClase')");
+                $query_insert = mysqli_query($conexionDB,"INSERT INTO socios(Nombre,Dni,Telefono,fecha_ingreso,fecha_vencimiento,Id_Clase,Imagen)
+                                                        VALUES('$nombre','$dni','$telefono','$fecha_ingreso','$fecha_vencimiento','$codClase','$imagen')");
                 
             // Consultar id de socio
             $consultaCodSocio="SELECT Id_Socio FROM socios
@@ -167,7 +168,7 @@
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <label for="nombre">Nombre y Apellidos</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo">
                   <label for="dni">Dni</label>
@@ -190,10 +191,14 @@
 					</select>
 				</div>
                 <div class="wd100">
-                	<label for="descuento">Descuento</label>
-					<input type="number" name="descuento" placeholder="Ingrese el descuento" value="0"/>
-					<br>
-				</div><br> 
+                        <label for="monto">Monto a pagar</label>
+                        <input type="number" name="monto" placeholder="Ingrese el monto a pagar" value="0">
+                </div>
+                <div class="wd100">
+                        <label for="imagen">Selecciona una imagen</label>
+                        <input type="file" name="imagen" id="imagen" accept="image/*">
+                        <br>
+                </div><br>
                 <button type="submit" class="btn_save_1"><i class="far fa-save"></i> Guardar Cliente</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>

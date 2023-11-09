@@ -28,6 +28,7 @@
         </form>
         <table>
             <tr>
+                <th>Foto</th>
                 <th>DNI</th>
                 <th>Nombre y Apellidos</th>
                 <th>Telefono</th>
@@ -64,6 +65,7 @@
 
                     ?>
                         <tr>
+                            <td><img height="50px" src="data:image/jpg;base64, <?php echo base64_encode($data["Imagen"])?>" alt=""></td>
                             <td><?php echo $data["Dni"]; ?></td>    
                             <td><?php echo $data["Nombre"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>

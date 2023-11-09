@@ -15,7 +15,6 @@
             $fecha_ingreso = $_POST['fecha_ingreso'];
             $fecha_vencimiento = $_POST['fecha_vencimiento'];
 
-
             $sql_update = mysqli_query($conexionDB,"UPDATE socios
                                                         SET Nombre='$nombre', Telefono='$telefono', 
                                                         fecha_ingreso='$fecha_ingreso', fecha_vencimiento='$fecha_vencimiento'
@@ -51,8 +50,7 @@
             $dni = $data['Dni'];
             $telefono = $data['Telefono'];
             $fecha_ingreso = $data['fecha_ingreso'];
-            $fecha_vencimiento = $data['fecha_vencimiento'];
-
+            $fecha_vencimiento = $data['fecha_vencimiento'];            
         }
     }
 
