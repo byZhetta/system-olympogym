@@ -74,7 +74,7 @@
                             <td><?php echo $data["fecha_vencimiento"]; ?></td>
                             <td>    
                                 <?php 
-                                    if(date('Y-m-d') > $data["fecha_vencimiento"]){
+                                    if('2023-11-14' >= $data["fecha_vencimiento"]){
                                 ?>      
                                 <a class="inactivo" href="reactivar_membresia.php?id=<?php echo $data["Id_Socio"]; ?>">Vencido</a>
                                 <?php

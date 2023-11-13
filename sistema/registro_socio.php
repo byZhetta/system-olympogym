@@ -1,6 +1,7 @@
 <?php 
 
-    include "../conexion.php";    
+    include "../conexion.php";
+    include 'includes/zona_horaria.php';    
     session_start();
 
     $listaClases = "SELECT NombreC FROM clases";
@@ -33,28 +34,28 @@
 
             switch ($membresia){
                 case 'Diario':
-                        $total = $monto; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 day'));
+                        $total = $monto;
+                        $fecha_vencimiento=date ("Y/m/j", strtotime($fecha_ingreso.'+1 day'));
                     break;
                 case 'Semanal':
                         $total = $monto; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 week'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime($fecha_ingreso.'+1 week'));
                     break;
                 case 'Mensual':
                         $total = $monto; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('1 month'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime($fecha_ingreso.'+1 month'));
                     break;
                 case 'Trimestral':
                         $total = $monto; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('3 month'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime($fecha_ingreso.'+1 month'));
                     break;
                 case 'Semestral':
                         $total = $monto; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('6 month'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime($fecha_ingreso.'+1 month'));
                     break;
                 case 'Anual':
                         $total = $monto; 
-                        $fecha_vencimiento=date ("Y/m/j", strtotime('12 month'));
+                        $fecha_vencimiento=date ("Y/m/j", strtotime($fecha_ingreso.'+1 month'));
                     break;
             }           
             $query = mysqli_query($conexionDB,"SELECT * FROM socios WHERE Dni = '$dni' OR Telefono = '$telefono' ");

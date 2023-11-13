@@ -9,6 +9,7 @@
         }
         
         $IdDetalle_venta_serv = $_POST['IdDetalle_venta_serv'];
+        
         $query_delete = mysqli_query($conexionDB,"DELETE FROM detalle_venta_servicios where IdDetalle_venta_serv = $IdDetalle_venta_serv");
         
         if(empty($_POST['IdVenta'])){

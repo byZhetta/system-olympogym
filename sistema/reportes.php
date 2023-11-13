@@ -1,5 +1,6 @@
 <?php
     include "../conexion.php";
+	include 'includes/zona_horaria.php';
     session_start();
 
     $fecha_de = '';
@@ -34,10 +35,9 @@
 				<label></label>
 				<input type="submit" name="nExcel1" id="idExcel" value="Exportar Excel"> 
         	</form>	
-
-			
         </div>
 	</section>
+	
 	<?php include "includes/footer.php"; ?>
 </body>
 </html>

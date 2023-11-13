@@ -1,13 +1,15 @@
 <?php 
     session_start();
     include "../conexion.php";
+    include 'includes/zona_horaria.php';
+    // date_default_timezone_set('America/Lima');
 
     $listaClases = "SELECT NombreC FROM clases";
     $listaClases = $conexionDB->query($listaClases);
 
     if(!empty($_POST)){
         $alert = '';
-        if(empty($_POST['memb_nueva']) || $_POST['descuento']){
+        if(empty($_POST['memb_nueva'])){
             $alert = '<p class="msg_error">Todos los campos son obligatorios.</p>';
         }else{
             $idSocio = $_POST['id'];
