@@ -5,6 +5,7 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
 body{
 	background: #ededed;
 }
@@ -348,6 +349,15 @@ table tr{
 	padding: 5px 8px;
 	border-radius: 4px;
 }
+
+.limite_fecha{
+	display: inline-block;
+	background:rgb(241, 159, 6);
+	color: #fff;
+	padding: 5px 8px;
+	border-radius: 4px;
+}
+
 .link_delete_1{
 	display: inline-block;
 	background: #f53a3a;

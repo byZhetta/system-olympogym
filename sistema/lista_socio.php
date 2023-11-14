@@ -36,6 +36,7 @@
                 <th>F. Inicio</th>
                 <th>F. Final</th>
                 <th>Estado</th>
+                <th>Días R.</th>
                 <th>Acciones</th>
             </tr>
             <?php
@@ -45,6 +46,11 @@
                 $total_registro = $result_register['total_registro'];
 
                 $por_pagina = 10;
+
+                $fecha_actual = date('Y-m-d');
+
+                //obtines el timestap de la fecha actual
+                $timestampFechaActual = strtotime($fecha_actual);
 
                 if(empty($_GET['pagina'])){
                     $pagina = 1;
@@ -74,16 +80,34 @@
                             <td><?php echo $data["fecha_vencimiento"]; ?></td>
                             <td>    
                                 <?php 
-                                    if('2023-11-14' >= $data["fecha_vencimiento"]){
+                                    $fecha_final = $data['fecha_vencimiento'];
+
+                                    //obtines el timestap de la fecha finanl
+                                    $timestampFechaFinal = strtotime($fecha_final);
+
+                                    // Calcular la diferencia en segundos entre la fecha final y la fecha actual
+                                    $diferenciaSegundos = $timestampFechaFinal - $timestampFechaActual;
+
+                                    // Calcular la diferencia en días
+                                    $diferenciaDias = floor($diferenciaSegundos/(60*60*24));
+
+                                    if($timestampFechaActual > $timestampFechaFinal){
                                 ?>      
                                 <a class="inactivo" href="reactivar_membresia.php?id=<?php echo $data["Id_Socio"]; ?>">Vencido</a>
                                 <?php
-                                    }else{
+                                    }else if($diferenciaDias <= 3){
+                                ?>
+                                    <p class="limite_fecha">Activo</p>
+                                <?php 
+                                    }else {
                                 ?>
                                     <p class="activo">Activo</p>
                                 <?php    
                                     }
                                 ?>
+                            </td>
+                            <td>
+                                <?php  echo $diferenciaDias; ?>
                             </td>
                             <td>
                                 <a class="link_edit" href="editar_socio.php?id=<?php echo $data["Id_Socio"]; ?>"><i class="far fa-edit"></i> Editar</a>
