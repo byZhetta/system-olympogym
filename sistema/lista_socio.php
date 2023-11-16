@@ -63,6 +63,7 @@
                 
                 $query = mysqli_query($conexionDB,"SELECT * FROM socios s   
                                                     INNER JOIN clases c ON s.Id_Clase = c.IdClase
+                                                    INNER JOIN ventas v on s.Id_Socio = v.Cod_Socio
                                                     ORDER BY s.Id_Socio DESC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
@@ -75,7 +76,7 @@
                             <td><?php echo $data["Dni"]; ?></td>    
                             <td><?php echo $data["Nombre"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
-                            <td><?php echo $data["NombreC"]; ?></td>
+                            <td><?php echo $data["NombreC"]; echo " - S/.";  echo $data["Total"]; ?></td>
                             <td><?php echo $data["fecha_ingreso"]; ?></td>
                             <td><?php echo $data["fecha_vencimiento"]; ?></td>
                             <td>    

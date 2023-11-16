@@ -10,7 +10,7 @@
     if(!empty($_POST)){
         $alert='';
         if(empty($_POST['nombre']) || empty($_POST['dni']) || empty($_POST['telefono']) || 
-        empty($_POST['membresia'])){
+        empty($_POST['membresia']) || empty($_POST['fech_ingreso']) || empty($_POST['imagen'])){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
