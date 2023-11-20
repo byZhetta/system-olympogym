@@ -44,7 +44,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Registro Usuario</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?> | Registro Usuario</title>
 </head>
 <body>
     
@@ -52,6 +53,7 @@
 	<section id="container">
 
         <div class="form_register">
+        <hr>
             <h1>Registro de usuario</h1>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
@@ -60,11 +62,11 @@
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo">
                 <label for="dni">Dni</label>
-                <input type="text" name="dni" id="dni" placeholder="Ingrese el DNI">
+                <input type="number" name="dni" id="dni" placeholder="Ingrese el DNI">
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion" placeholder="Ingrese una Dirección">
                 <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
+                <input type="number" name="telefono" id="telefono" placeholder="Ingrese un Teléfono">
                 <label for="correo">Email</label>
                 <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico">
                 <label for="usuario">Usuario</label>

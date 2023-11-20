@@ -7,17 +7,17 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
-    
     <?php include "includes/header.php"; ?>
 	<section id="container">
 
-		<h1>CLASES DEPORTIVAS</h1>
+		<h1>Membresias</h1>
 
         <div class="form_search">
-            <a href="registro_clase.php" class="btn_new"><i class="fas fa-plus"></i> Crear Clase nueva</a>
+            <a href="registro_clase.php" class="btn_new"><i class="fas fa-plus"></i> Crear nueva membresía</a>
         </div>
             
     <div class="containerTable">
@@ -25,9 +25,6 @@
             <tr>
                 <th>Nro.</th>
                 <th>Nombre</th>
-                <th>Instructor</th>
-                <th>Dias</th>
-                <th>Hora</th>
                 <th>Duración</th>
                 <th>Precio</th>
                 <th>Acciones</th>
@@ -49,8 +46,8 @@
                 $desde = ($pagina-1) * $por_pagina;
                 $total_paginas = ceil($total_registro / $por_pagina);
                 
-                $query = mysqli_query($conexionDB,"SELECT c.IdClase, c.NombreC, c.Dias, c.Hora, c.Duracion, c.Costo_Clase, i.Nombre 
-                                                    FROM clases c INNER JOIN instructores i ON c.Cod_Instructor = i.Id_Instructor
+                $query = mysqli_query($conexionDB,"SELECT c.IdClase, c.NombreC, c.Duracion, c.Costo_Clase 
+                                                    FROM clases as c
                                                     ORDER BY c.IdClase ASC LIMIT $desde,$por_pagina");
                 mysqli_close($conexionDB);
                 $result = mysqli_num_rows($query);
@@ -61,11 +58,8 @@
                         <tr>
                             <td><?php echo $data["IdClase"]; ?></td>
                             <td><?php echo $data["NombreC"]; ?></td>
-                            <td><?php echo $data["Nombre"]; ?></td>
-                            <td><?php echo $data["Dias"]; ?></td>
-                            <td><?php echo $data["Hora"]; ?></td>
                             <td><?php echo $data["Duracion"]; ?></td>
-                            <td>$ <?php echo $data["Costo_Clase"]; ?></td>
+                            <td>S/.<?php echo $data["Costo_Clase"]; ?></td>
                             <td>
                                 <a class="link_edit" href="editar_clase.php?id=<?php echo $data["IdClase"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 <?php if($_SESSION['rol'] == 1){ ?>	

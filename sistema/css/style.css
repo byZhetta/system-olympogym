@@ -5,6 +5,7 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
 body{
 	background: #ededed;
 }
@@ -64,7 +65,7 @@ header{
 }
 .header{
 	color: #FFF;
-	background: #a39543;
+	background: #00000091;
 	height: 35px;
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -334,6 +335,29 @@ table tr{
 	padding: 5px 8px;
 	border-radius: 4px;
 }
+.inactivo{
+	display: inline-block;
+	background: #f53a3a;
+	color: #fff;
+	padding: 5px 8px;
+	border-radius: 4px;
+}
+.activo{
+	display: inline-block;
+	background:#2abd17;
+	color: #fff;
+	padding: 5px 8px;
+	border-radius: 4px;
+}
+
+.limite_fecha{
+	display: inline-block;
+	background:rgb(241, 159, 6);
+	color: #fff;
+	padding: 5px 8px;
+	border-radius: 4px;
+}
+
 .link_delete_1{
 	display: inline-block;
 	background: #f53a3a;

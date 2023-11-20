@@ -1,6 +1,6 @@
 <?php 
 
-    // date_default_timezone_set('America/Argentina/Buenos Aires');
+    // date_default_timezone_set('America/Lima');
 	
 	function fechaC(){
 		$mes = array("","Enero",

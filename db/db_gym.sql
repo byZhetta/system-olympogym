@@ -1,11 +1,24 @@
--- Base de datos del sistema OlympoGYM - @byZhetta
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 19-06-2023 a las 20:02:04
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de datos: `gimnasio`
+-- Base de datos: `db_gym`
 --
 
 DELIMITER $$
@@ -93,7 +106,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `procesar_venta` (IN `cod_usuario` I
                       SET total = (SELECT SUM(cantidad * precio_venta) FROM detalle_temp);
                       
                       SET totalcaj = (SELECT SUM(Total_caja) + total as totalc FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja));
-                      
+
                       INSERT INTO caja (Actividad,Monto_inicial,Total_caja,Cod_Empleado,Estado) VALUES ('Venta de Artículo', total, totalcaj, cod_usuario,'Abierto');
 	              SET incaja= LAST_INSERT_ID();                                         
                
@@ -118,12 +131,16 @@ DELIMITER ;
 
 CREATE TABLE `articulos` (
   `IdArticulo` int(11) NOT NULL,
-  `Descripcion` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Descripcion` varchar(50) NOT NULL,
   `Cantidad` int(11) NOT NULL,
   `Precio_Unitario` decimal(8,2) NOT NULL,
-  `Marca` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Marca` varchar(20) NOT NULL,
   `Cod_Proveedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `articulos`
+--
 
 -- --------------------------------------------------------
 
@@ -134,13 +151,18 @@ CREATE TABLE `articulos` (
 CREATE TABLE `caja` (
   `IdCaja` int(11) NOT NULL,
   `FechaApertura` datetime NOT NULL DEFAULT current_timestamp(),
-  `Actividad` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Actividad` text NOT NULL,
   `Monto_inicial` decimal(8,2) NOT NULL,
   `Monto_salida` decimal(8,2) NOT NULL,
   `Total_caja` decimal(8,2) NOT NULL,
   `Cod_Empleado` int(11) NOT NULL,
-  `Estado` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Estado` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `caja`
+--
+
 
 -- --------------------------------------------------------
 
@@ -150,13 +172,21 @@ CREATE TABLE `caja` (
 
 CREATE TABLE `clases` (
   `IdClase` int(11) NOT NULL,
-  `Cod_Instructor` int(11) NOT NULL,
-  `NombreC` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Dias` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Hora` time NOT NULL,
-  `Duracion` time NOT NULL,
+  `NombreC` varchar(50) NOT NULL,
+  `Duracion` varchar(50) DEFAULT NULL,
   `Costo_Clase` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `clases`
+--
+INSERT INTO `clases` (`IdClase`, `NombreC`, `Duracion`, `Costo_Clase`) VALUES
+(1, 'Basico', '1 mes', 50),
+(2, 'Premiun', '1 mes', 60),
+(3, 'Vip', '1 mes', 70),
+(4, 'Trimestral', '3 meses', 150),
+(5, 'Semestral', '6 meses', 270),
+(6, 'Anual', '12 meses', 480);
 
 -- --------------------------------------------------------
 
@@ -170,7 +200,7 @@ CREATE TABLE `detallefactura` (
   `CodArticulo` int(11) NOT NULL,
   `Cantidad` int(11) NOT NULL,
   `precio_venta` decimal(8,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -200,7 +230,11 @@ CREATE TABLE `detalle_venta_servicios` (
   `Fecha_Alta` date NOT NULL,
   `Fecha_Vencim` date NOT NULL,
   `Total` decimal(8,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_venta_servicios`
+--
 
 -- --------------------------------------------------------
 
@@ -210,13 +244,13 @@ CREATE TABLE `detalle_venta_servicios` (
 
 CREATE TABLE `empleados` (
   `IdEmpleado` int(11) NOT NULL,
-  `Nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
   `Dni` int(11) NOT NULL,
-  `Direccion` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Direccion` varchar(50) NOT NULL,
   `Telefono` int(11) NOT NULL,
-  `Email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Usuario` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Clave` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Usuario` varchar(20) NOT NULL,
+  `Clave` varchar(50) NOT NULL,
   `Rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -236,13 +270,17 @@ INSERT INTO `empleados` (`IdEmpleado`, `Nombre`, `Dni`, `Direccion`, `Telefono`,
 
 CREATE TABLE `instructores` (
   `Id_Instructor` int(11) NOT NULL,
-  `Nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
   `Dni` int(10) UNSIGNED NOT NULL,
-  `Direccion` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Direccion` varchar(50) NOT NULL,
   `Telefono` int(11) NOT NULL,
-  `Email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(50) NOT NULL,
   `Sueldo` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `instructores`
+--
 
 -- --------------------------------------------------------
 
@@ -252,12 +290,16 @@ CREATE TABLE `instructores` (
 
 CREATE TABLE `proveedores` (
   `IdProveedor` int(11) NOT NULL,
-  `Nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Direccion` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
+  `Direccion` varchar(50) NOT NULL,
   `Codigo_Postal` int(11) NOT NULL,
   `Telefono` int(11) NOT NULL,
-  `Email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
 
 -- --------------------------------------------------------
 
@@ -267,7 +309,7 @@ CREATE TABLE `proveedores` (
 
 CREATE TABLE `rol` (
   `IdRol` int(11) NOT NULL,
-  `rol` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `rol` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -286,14 +328,20 @@ INSERT INTO `rol` (`IdRol`, `rol`) VALUES
 
 CREATE TABLE `socios` (
   `Id_Socio` int(11) NOT NULL,
-  `Nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Nombre` varchar(50) NOT NULL,
   `Dni` int(11) NOT NULL,
-  `Direccion` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Direccion` varchar(50) NOT NULL,
   `Telefono` int(11) NOT NULL,
-  `Email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+  `Email` varchar(50) NOT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  `fecha_vencimiento` date DEFAULT NULL,
+  `Id_Clase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
+INSERT INTO `socios` (`Id_Socio`, `Nombre`, `Dni`, `Direccion`, `Telefono`, `Email`, `fecha_ingreso`, `fecha_vencimiento`, `Id_Clase`) VALUES
+(1, 'Cliente General', 12345678, 'null', 987654321,'null', '2023-06-18', '2023-07-18', 1);
+
 
 --
 -- Estructura de tabla para la tabla `ventas`
@@ -306,6 +354,10 @@ CREATE TABLE `ventas` (
   `Cod_Socio` int(11) DEFAULT NULL,
   `Total` decimal(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
 
 --
 -- Índices para tablas volcadas
@@ -329,8 +381,7 @@ ALTER TABLE `caja`
 -- Indices de la tabla `clases`
 --
 ALTER TABLE `clases`
-  ADD PRIMARY KEY (`IdClase`),
-  ADD KEY `Cod_Instructor` (`Cod_Instructor`);
+  ADD PRIMARY KEY (`IdClase`);
 
 --
 -- Indices de la tabla `detallefactura`
@@ -384,7 +435,8 @@ ALTER TABLE `rol`
 -- Indices de la tabla `socios`
 --
 ALTER TABLE `socios`
-  ADD PRIMARY KEY (`Id_Socio`);
+  ADD PRIMARY KEY (`Id_Socio`),
+  ADD KEY `fk_relacion` (`Id_Clase`);
 
 --
 -- Indices de la tabla `ventas`
@@ -402,37 +454,37 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `IdArticulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `IdArticulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `IdCaja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `IdCaja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT de la tabla `clases`
 --
 ALTER TABLE `clases`
-  MODIFY `IdClase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdClase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `detallefactura`
 --
 ALTER TABLE `detallefactura`
-  MODIFY `IdDetalle_venta_art` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IdDetalle_venta_art` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `correlativo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `correlativo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta_servicios`
 --
 ALTER TABLE `detalle_venta_servicios`
-  MODIFY `IdDetalle_venta_serv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IdDetalle_venta_serv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -444,13 +496,13 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `instructores`
 --
 ALTER TABLE `instructores`
-  MODIFY `Id_Instructor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_Instructor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `IdProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -462,13 +514,13 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `socios`
 --
 ALTER TABLE `socios`
-  MODIFY `Id_Socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id_Socio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `IdVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `IdVenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- Restricciones para tablas volcadas
@@ -487,4 +539,14 @@ ALTER TABLE `detallefactura`
 ALTER TABLE `detalle_venta_servicios`
   ADD CONSTRAINT `detalle_venta_servicios_ibfk_1` FOREIGN KEY (`Cod_Venta`) REFERENCES `ventas` (`IdVenta`),
   ADD CONSTRAINT `detalle_venta_servicios_ibfk_2` FOREIGN KEY (`Cod_Clase`) REFERENCES `clases` (`IdClase`);
+
+--
+-- Filtros para la tabla `socios`
+--
+ALTER TABLE `socios`
+  ADD CONSTRAINT `fk_relacion` FOREIGN KEY (`Id_Clase`) REFERENCES `clases` (`IdClase`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

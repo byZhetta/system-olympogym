@@ -4,21 +4,23 @@
     
     if(!empty($_POST)){
         $alert='';
-        if(empty($_POST['nombre']) || empty($_POST['direccion']) || empty($_POST['telefono']) ||
-           empty($_POST['correo']) ){
+        if(empty($_POST['nombre']) || empty($_POST['telefono'] ) || empty($_POST['fecha_ingreso'] ) || 
+        empty($_POST['fecha_vencimiento'] || empty($_POST['imagen'])) ){
                $alert='<p class="msg_error">Todos los campos son obligatorios.</p>';
         } else {
 
             $idSocio   = $_POST['id'];
             $nombre    = $_POST['nombre'];
-            $direccion = $_POST['direccion'];
             $telefono  = $_POST['telefono'];
-            $email     = $_POST['correo'];
-
+            $fecha_ingreso = $_POST['fecha_ingreso'];
+            $fecha_vencimiento = $_POST['fecha_vencimiento'];
+            $imagen = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
 
             $sql_update = mysqli_query($conexionDB,"UPDATE socios
-                                                        SET Nombre='$nombre', Direccion='$direccion', Telefono='$telefono', Email='$email'
-                                                        WHERE Id_Socio=$idSocio ");
+                                                        SET Nombre='$nombre', Telefono='$telefono', 
+                                                        fecha_ingreso='$fecha_ingreso', fecha_vencimiento='$fecha_vencimiento',
+                                                        Imagen='$imagen'
+                                                        WHERE Id_Socio=$idSocio");
 
             if($sql_update){
                 $alert = '<p class="msg_save">Socio actualizado correctamente.</p>';
@@ -48,10 +50,10 @@
             $idsocio = $data['Id_Socio'];
             $nombre = $data['Nombre'];
             $dni = $data['Dni'];
-            $direccion = $data['Direccion'];
             $telefono = $data['Telefono'];
-            $correo = $data['Email'];
-
+            $fecha_ingreso = $data['fecha_ingreso'];
+            $fecha_vencimiento = $data['fecha_vencimiento'];
+            $imagenV = $data['Imagen'];            
         }
     }
 
@@ -61,7 +63,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     
@@ -73,16 +76,20 @@
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : ''; ?></div>
 
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $idsocio; ?>">
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre Completo" value="<?php echo $nombre; ?>">
-                <label for="direccion">Dirección</label>
-                <input type="text" name="direccion" id="direccion" placeholder="Ingrese una Dirección" value="<?php echo $direccion; ?>">
                 <label for="telefono">Teléfono</label>
                 <input type="text" name="telefono" id="telefono" placeholder="Ingrese un Teléfono" value="<?php echo $telefono; ?>">
-                <label for="correo">Email</label>
-                <input type="email" name="correo" id="correo" placeholder="Ingrese un Correo electrónico" value="<?php echo $correo; ?>"><br>
+                <label for="fecha_ingreso">Fecha de ingreso</label>
+                <input type="date" name="fecha_ingreso" id="fecha_ingreso" placeholder="Ingrese fecha de ingreso" value="<?php echo $fecha_ingreso; ?>">
+                <label for="fecha_vencimiento">Fecha de vencimiento</label>
+                <input type="date" name="fecha_vencimiento" id="fecha_vencimiento" placeholder="Ingrese fecha de vencimiento" value="<?php echo $fecha_vencimiento; ?>">
+                <label for="imagen">Selecciona una imagen</label>
+                <img height="40px" src="data:image/jpg;base64, <?php echo base64_encode($imagenV)?>" alt="">
+                <input type="file" name="imagen" id="imagen" accept="image/*">
+                <br>
                 <button type="submit" class="btn_save_1"><i class="far fa-edit"></i> Actualizar socio</button>
                 <a href="lista_socio.php" class="link_delete_1" style="float: right;"><i class="fas fa-minus-circle"></i> Cancelar</a>
             </form>

@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     
@@ -69,7 +70,7 @@
                             <td><?php echo $data["Direccion"]; ?></td>
                             <td><?php echo $data["Telefono"]; ?></td>
                             <td><?php echo $data["Email"]; ?></td>
-                            <td>$ <?php echo $data["Sueldo"]; ?></td>
+                            <td>S/.<?php echo $data["Sueldo"]; ?></td>
                             <td>
                                 <a class="link_edit" href="editar_instructor.php?id=<?php echo $data["Id_Instructor"]; ?>"><i class="far fa-edit"></i> Editar</a>
                                 |

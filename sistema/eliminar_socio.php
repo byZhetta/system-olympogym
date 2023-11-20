@@ -9,7 +9,7 @@
         }
         $idSocio = $_POST['idSocio'];
         //$query_delete = mysqli_query($conexionDB,"UPDATE socios SET estatus = 0 WHERE Id_Socio = $idSocio");
-        $query_delete = mysqli_query($conexionDB,"DELETE FROM socios WHERE Id_Socio = $idSocio ");
+        $query_delete = mysqli_query($conexionDB,"DELETE FROM socios WHERE Id_Socio = $idSocio");
         mysqli_close($conexionDB);
         if($query_delete){
             header("location: lista_socio.php");
@@ -47,7 +47,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+    <?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     

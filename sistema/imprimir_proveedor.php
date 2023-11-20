@@ -17,12 +17,11 @@
                 // color del encabezado
             $pdf->Ln(10);
                 // dejo un espacio de 10
-            $pdf->Cell(25, 6, 'Nro.', 1, 0, 'C', 1);
-            $pdf->Cell(35, 6, 'Nombre', 1, 0, 'C', 1);
-            $pdf->Cell(35, 6, 'Direccion', 1, 0, 'C', 1);
-            $pdf->Cell(20, 6, 'C Postal', 1, 0, 'C', 1);
-            $pdf->Cell(25, 6, 'Telefono', 1, 0, 'C', 1);
-            $pdf->Cell(43, 6, 'Email', 1, 1, 'C', 1);
+            $pdf->Cell(30, 6, 'Nro.', 1, 0, 'C', 1);
+            $pdf->Cell(40, 6, 'Nombre', 1, 0, 'C', 1);
+            $pdf->Cell(40, 6, 'Direccion', 1, 0, 'C', 1);
+            $pdf->Cell(30, 6, 'Telefono', 1, 0, 'C', 1);
+            $pdf->Cell(48, 6, 'Email', 1, 1, 'C', 1);
                 // son los Títulos de la tabla
                 //     ancho/ alto/ texto/ borde/ salto de línea/ Centrado
 
@@ -38,12 +37,11 @@
                 while ($fila = $queryArticulos->fetch_assoc())
                 {
                     // recorro el query imprimiendo los campos
-                    $pdf->Cell(25, 6, $fila["IdProveedor"], 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
-                    $pdf->Cell(35, 6, mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
-                    $pdf->Cell(20, 6, $fila["Codigo_Postal"], 1, 0, 'C', 1);
-                    $pdf->Cell(25, 6, $fila["Telefono"], 1, 0, 'C', 1);
-                    $pdf->Cell(43, 6, $fila["Email"], 1, 1, 'C', 1);
+                    $pdf->Cell(30, 6, $fila["IdProveedor"], 1, 0, 'C', 1);
+                    $pdf->Cell(40, 6, mb_convert_encoding($fila["Nombre"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+                    $pdf->Cell(40, 6, mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8'), 1, 0, 'C', 1);
+                    $pdf->Cell(30, 6, $fila["Telefono"], 1, 0, 'C', 1);
+                    $pdf->Cell(48, 6, $fila["Email"], 1, 1, 'C', 1);
                 }
                 $pdf->Output('', 'articulos_completo.pdf');
                 // acá mando la salida y con nombre por defecto como "articulos_completo.pdf"
@@ -76,9 +74,6 @@
                     echo            "Dirección";
                     echo        "<td>";
                     echo        "<td style=\"width:100px\">";
-                    echo            "Cod Postal";
-                    echo        "<td>";
-                    echo        "<td style=\"width:100px\">";
                     echo            "Teléfono";
                     echo        "<td>";
                     echo        "<td style=\"width:100px\">";
@@ -96,9 +91,6 @@
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
                         echo            mb_convert_encoding($fila["Direccion"], 'ISO-8859-1', 'UTF-8');
-                        echo        "<td>";
-                        echo        "<td style=\"width:100px\">";
-                        echo            $fila["Codigo_Postal"];
                         echo        "<td>";
                         echo        "<td style=\"width:100px\">";
                         echo            $fila["Telefono"];

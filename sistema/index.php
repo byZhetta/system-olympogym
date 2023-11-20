@@ -6,7 +6,8 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Olympo gym | Sistema</title>
+	<?php include "includes/texto.php"; ?>
+	<title><?php echo $nombreGym ?></title>
 </head>
 <body>
     
@@ -43,7 +44,7 @@
 				<a href="lista_socio.php">
 				    <i class="fas fa-users"></i>
 					<p>
-					    <strong>Socios</strong><br>
+					    <strong>Clientes</strong><br>
 						<span><?= $data_dash['socios']; ?></span>
 					</p>
 				</a>
@@ -138,28 +139,32 @@
 					    <label>Usuario: </label><span><?= $_SESSION['user']; ?></span>
 					</div>
 					<div>
-					    <label>Saldo Total: </label><span>$ <?= $igual; ?></span>
+					    <label>Saldo Total: </label><span>S/. <?= $igual; ?></span>
 					</div>
 				<?php 
 				    include "../conexion.php"; 
 				    $query = mysqli_query($conexionDB,"SELECT Estado, IdCaja FROM caja WHERE IdCaja = (SELECT MAX(IdCaja) FROM caja WHERE Cod_Empleado = '$user')");
 					$conexionDB->close();
 				    $resultado = mysqli_fetch_array($query);
-					$estado = $resultado['Estado'];
+					if($resultado){
+						$estado = $resultado['Estado'];
+					}else{
+						$estado = "Cerrado";
+					}
 					if($estado == 'Abierto'){
-				?>
-				    <div>
-						<label>Estado de Caja: </label><span style="color: #fff; background: #60a756; border-radius:5px; padding: 3px 15px;">
-						ABIERTA</span>
-					</div><br>
-				<?php
+					?>
+				    	<div>
+							<label>Estado de Caja: </label><span style="color: #fff; background: #60a756; border-radius:5px; padding: 3px 15px;">
+							ABIERTA</span>
+						</div><br>
+					<?php
 	                } else {
-                ?>
-					<div>
-						<label>Estado de Caja: </label><span style="color: #fff; background: #f36a6a; border-radius:5px; padding: 3px 15px;">
-						CERRADA</span>
-					</div><br>
-				<?php
+                	?>
+						<div>
+							<label>Estado de Caja: </label><span style="color: #fff; background: #f36a6a; border-radius:5px; padding: 3px 15px;">
+							CERRADA</span>
+						</div><br>
+					<?php
                     }
                 ?>
 					<h4>Datos de Caja</h4>
